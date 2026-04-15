@@ -1,0 +1,128 @@
+"use client";
+
+import { useState } from "react";
+import Link from "next/link";
+import { createSupabaseBrowserClient } from "@/lib/supabase/client";
+
+export default function SignupPage() {
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const supabase = createSupabaseBrowserClient();
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setError(null);
+    setLoading(true);
+    const fd = new FormData(e.currentTarget);
+    const { error } = await supabase.auth.signUp({
+      email: fd.get("email") as string,
+      password: fd.get("password") as string,
+    });
+    if (error) {
+      setError(error.message);
+      setLoading(false);
+    } else {
+      setSuccess(true);
+    }
+  }
+
+  if (success) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-tavern px-4">
+        <div className="w-full max-w-sm text-center">
+          <div className="text-4xl mb-4">📜</div>
+          <h2 className="font-display text-xl text-gold mb-3 tracking-wide">
+            Check Your Scrolls
+          </h2>
+          <p className="text-parchment-muted text-sm mb-6">
+            A confirmation message has been sent to your email. Click the link
+            to begin your adventure.
+          </p>
+          <Link
+            href="/auth/login"
+            className="text-gold hover:text-gold-light text-sm transition-colors"
+          >
+            Return to the tavern
+          </Link>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <div className="min-h-screen flex items-center justify-center bg-tavern px-4">
+      <div className="w-full max-w-sm">
+        <div className="text-center mb-8">
+          <h1 className="font-display text-4xl text-gold tracking-widest mb-2">
+            QUESTIFY
+          </h1>
+          <p className="text-parchment-muted text-sm">
+            Create your adventurer
+          </p>
+        </div>
+
+        <div className="bg-tavern-light border border-tavern-border rounded-lg p-8">
+          <h2 className="font-display text-lg text-parchment mb-6 tracking-wide">
+            Join the Guild
+          </h2>
+
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <label className="block text-parchment-muted text-xs uppercase tracking-widest mb-1.5">
+                Email
+              </label>
+              <input
+                name="email"
+                type="email"
+                required
+                autoComplete="email"
+                className="w-full bg-tavern border border-tavern-border text-parchment px-3 py-2.5 rounded focus:outline-none focus:border-gold placeholder-ink-muted text-sm"
+                placeholder="adventurer@realm.com"
+              />
+            </div>
+
+            <div>
+              <label className="block text-parchment-muted text-xs uppercase tracking-widest mb-1.5">
+                Password
+              </label>
+              <input
+                name="password"
+                type="password"
+                required
+                minLength={6}
+                autoComplete="new-password"
+                className="w-full bg-tavern border border-tavern-border text-parchment px-3 py-2.5 rounded focus:outline-none focus:border-gold placeholder-ink-muted text-sm"
+                placeholder="6+ characters"
+              />
+            </div>
+
+            {error && (
+              <p className="text-red-400 text-sm border border-red-900 bg-red-950/30 rounded px-3 py-2">
+                {error}
+              </p>
+            )}
+
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-gold text-tavern font-semibold py-2.5 rounded hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-display tracking-wider text-sm mt-2"
+            >
+              {loading ? "Enrolling…" : "Enroll as Adventurer"}
+            </button>
+          </form>
+
+          <p className="text-center text-parchment-muted text-sm mt-6">
+            Already enrolled?{" "}
+            <Link
+              href="/auth/login"
+              className="text-gold hover:text-gold-light transition-colors"
+            >
+              Sign in
+            </Link>
+          </p>
+        </div>
+      </div>
+    </div>
+  );
+}

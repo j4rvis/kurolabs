@@ -1,0 +1,9 @@
+node_modules
+apps/web/node_modules
+apps/web/.next
+apps/web/.env
+apps/web/.env.local
+apps/web/.env*.local
+apps/mobile
+supabase
+.pnpm-store

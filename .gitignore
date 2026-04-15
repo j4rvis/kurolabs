@@ -1,0 +1,44 @@
+# Environment variables (never commit secrets)
+.env
+.env.local
+.env.*.local
+# But allow example/template files
+!.env.example
+!.env.local.example
+
+# Node
+node_modules/
+.pnpm-store/
+
+# Next.js
+apps/web/.next/
+apps/web/out/
+
+# Flutter
+apps/mobile/.dart_tool/
+apps/mobile/.flutter-plugins
+apps/mobile/.flutter-plugins-dependencies
+apps/mobile/build/
+apps/mobile/.packages
+apps/mobile/pubspec.lock
+
+# Supabase
+supabase/.temp/
+supabase/functions/.deno/
+
+# macOS
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+*.iml
+
+# Logs
+*.log
+npm-debug.log*
+
+# Dart/Flutter generated
+*.g.dart
+*.freezed.dart
+.vercel
