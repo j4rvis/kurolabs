@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install --filter __VERTICAL__-web",
+  "buildCommand": "pnpm --filter __VERTICAL__-web build",
+  "outputDirectory": "verticals/__VERTICAL__/web/.next",
+  "framework": "nextjs"
+}

@@ -1,0 +1,14 @@
+# shared/supabase — Canonical source for cross-vertical schema
+#
+# This directory is NOT a standalone Supabase project. The migrations/
+# here define the shared tables (profiles, characters, xp_thresholds)
+# that every vertical's Supabase project must apply.
+#
+# Usage:
+#   When setting up a new vertical's Supabase project, apply the shared
+#   migrations first (via symlinks or copies), then the vertical-specific
+#   ones. See verticals/questify/supabase/ for the reference implementation.
+#
+# For Questify (the only vertical today):
+#   The migrations are symlinked into verticals/questify/supabase/migrations/
+#   so the Supabase CLI sees a single ordered migration set.

@@ -8,8 +8,23 @@ importers:
 
   .: {}
 
-  apps/web:
+  shared/web:
     dependencies:
+      '@supabase/ssr':
+        specifier: ^0.10.0
+        version: 0.10.0(@supabase/supabase-js@2.101.1)
+      '@supabase/supabase-js':
+        specifier: ^2.0.0
+        version: 2.101.1
+      next:
+        specifier: '>=16.0.0'
+        version: 16.2.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
+
+  verticals/questify/web:
+    dependencies:
+      '@kurolabs/web':
+        specifier: workspace:*
+        version: link:../../../shared/web
       '@supabase/ssr':
         specifier: ^0.10.0
         version: 0.10.0(@supabase/supabase-js@2.101.1)

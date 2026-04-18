@@ -1,0 +1,1 @@
+../../../../shared/supabase/migrations/20260406000001_shared_profiles_characters.sql

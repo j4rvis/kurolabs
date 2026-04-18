@@ -1,0 +1,17 @@
+{
+  "name": "@kurolabs/web",
+  "version": "0.1.0",
+  "private": true,
+  "exports": {
+    ".": "./src/index.ts",
+    "./supabase/client": "./src/supabase/client.ts",
+    "./supabase/server": "./src/supabase/server.ts",
+    "./middleware/auth": "./src/middleware/auth.ts",
+    "./types": "./src/types/core.ts"
+  },
+  "peerDependencies": {
+    "next": ">=16.0.0",
+    "@supabase/ssr": "^0.10.0",
+    "@supabase/supabase-js": "^2.0.0"
+  }
+}

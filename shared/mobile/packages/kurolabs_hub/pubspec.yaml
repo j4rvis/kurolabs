@@ -1,0 +1,18 @@
+name: kurolabs_hub
+description: "Shared module hub and launcher UI for KuroLabs Flutter apps"
+publish_to: 'none'
+version: 0.1.0
+
+environment:
+  sdk: ^3.11.4
+
+dependencies:
+  flutter:
+    sdk: flutter
+  go_router: ^15.1.2
+  flutter_riverpod: ^2.6.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^6.0.0
