@@ -29,13 +29,34 @@ When ready to implement, run /opsx:apply
 
    **IMPORTANT**: Do NOT proceed without understanding what the user wants to build.
 
-2. **Create the change directory**
+2. **Check available skills and ask clarifying questions**
+
+   Before creating anything, do two things:
+
+   a. **Check for relevant skills** — read `.claude/skills/INDEX.md` (do NOT scan individual skill files). Match skills against the request. For example:
+      - If the user wants a new vertical/app → surface the `new-app` skill (runs `scripts/new-vertical.sh`)
+      - If the user wants Supabase work → surface the `supabase` skill
+      Mention any relevant skills and ask if the user wants to use them first or alongside this proposal.
+
+   b. **Ask 2–4 targeted clarifying questions** using the **AskUserQuestion tool**.
+      Tailor questions to the description — don't ask things already answered. Useful angles:
+      - Scope: which sub-apps are involved (web / mobile / supabase / shared)?
+      - Users / actors: who does this affect and what do they need to do?
+      - Success criteria: what does "done" look like? Any acceptance conditions?
+      - Constraints: deadlines, dependencies on other changes, things to avoid?
+      - Edge cases or known risks worth calling out in the design?
+
+   Only ask questions that would meaningfully change the proposal. Skip any that are already clear from the description.
+
+   **IMPORTANT**: Wait for the user's answers before proceeding to step 3.
+
+3. **Create the change directory**
    ```bash
    openspec new change "<name>"
    ```
    This creates a scaffolded change at `openspec/changes/<name>/` with `.openspec.yaml`.
 
-3. **Get the artifact build order**
+4. **Get the artifact build order**
    ```bash
    openspec status --change "<name>" --json
    ```
@@ -43,7 +64,7 @@ When ready to implement, run /opsx:apply
    - `applyRequires`: array of artifact IDs needed before implementation (e.g., `["tasks"]`)
    - `artifacts`: list of all artifacts with their status and dependencies
 
-4. **Create artifacts in sequence until apply-ready**
+5. **Create artifacts in sequence until apply-ready**
 
    Use the **TodoWrite tool** to track progress through the artifacts.
 
@@ -75,7 +96,7 @@ When ready to implement, run /opsx:apply
       - Use **AskUserQuestion tool** to clarify
       - Then continue with creation
 
-5. **Show final status**
+6. **Show final status**
    ```bash
    openspec status --change "<name>"
    ```
