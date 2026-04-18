@@ -5,5 +5,8 @@ apps/web/.env
 apps/web/.env.local
 apps/web/.env*.local
 apps/mobile
-supabase
+/shared/supabase/
+/scripts/templates/supabase/
+/scripts/templates/web/lib/supabase/
+/verticals/questify/supabase/
 .pnpm-store
