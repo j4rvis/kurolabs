@@ -38,15 +38,17 @@ D&D-themed habit/quest tracker. Users create quests, complete them for XP, and l
 | `daily-reset` | Scheduled | Calls `reset_daily_quests()` |
 | `invite-quest-giver` | HTTP POST | Creates a quest_givers invite row |
 
-## Web routes (`verticals/questify/web/app/`)
+## Web routes (`web/app/(questify)/`)
 
-- `/` — landing / auth redirect
-- `/auth/` — login, signup, callback
-- `/dashboard/` — main app shell
-- `/api/quests/` — CRUD + complete action
-- `/api/characters/` — character sheet
-- `/api/village/` — NPC connections + templates
-- `/api/quest-givers/` — invite flow
+Questify routes live in the shell under the `(questify)` route group. Route files import components and logic from `@questify/web`.
+
+- `/(questify)/dashboard/` — Questify main dashboard
+- `/(questify)/api/quests/` — CRUD + complete action
+- `/(questify)/api/characters/` — character sheet
+- `/(questify)/api/village/` — NPC connections + templates
+- `/(questify)/api/quest-givers/` — invite flow
+
+Auth routes (`/auth/login`, `/auth/signup`, `/api/auth/callback`) live in the shell's `(auth)` group, not in this vertical.
 
 ## Types file
 

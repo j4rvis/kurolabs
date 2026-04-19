@@ -1,0 +1,3 @@
+{
+  "/(questify)/api/village/[npcId]/quests/route": "app/(questify)/api/village/[npcId]/quests/route.js"
+}

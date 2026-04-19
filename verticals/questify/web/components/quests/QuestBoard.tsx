@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import type { Quest, QuestType } from "@/lib/types";
+import type { Quest, QuestType } from "../../lib/types";
 import QuestCard from "./QuestCard";
 
 type QuestWithNpc = Quest & {

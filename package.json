@@ -1,8 +1,8 @@
 {
-  "name": "questify",
+  "name": "kurolabs",
   "private": true,
   "version": "0.0.1",
-  "description": "D&D-themed habit and quest tracking app",
+  "description": "",
   "scripts": {
     "dev": "pnpm --filter web dev",
     "build": "pnpm --filter web build",

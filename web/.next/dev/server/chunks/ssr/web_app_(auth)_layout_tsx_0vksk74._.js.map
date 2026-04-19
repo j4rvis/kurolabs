@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///Users/micha/code/kurolabs/web/app/%28auth%29/layout.tsx"],"sourcesContent":["export const dynamic = \"force-dynamic\";\n\nexport default function AuthLayout({\n  children,\n}: {\n  children: React.ReactNode;\n}) {\n  return <>{children}</>;\n}\n"],"names":["dynamic","AuthLayout","children"],"mappings":";;;;;;;;AAAO,MAAMA,UAAU;AAER,SAASC,WAAW,EACjCC,QAAQ,EAGT;IACC,qBAAO;kBAAGA;;AACZ"}}]
+}

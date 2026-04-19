@@ -1,0 +1,3 @@
+{
+  "/(questify)/api/epics/route": "app/(questify)/api/epics/route.js"
+}

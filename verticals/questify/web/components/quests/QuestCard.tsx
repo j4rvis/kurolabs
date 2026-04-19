@@ -1,5 +1,5 @@
-import type { Quest } from "@/lib/types";
-import { DifficultyBadge, QuestTypeBadge } from "@/components/ui/Badge";
+import type { Quest } from "../../lib/types";
+import { DifficultyBadge, QuestTypeBadge } from "../ui/Badge";
 import CompleteQuestButton from "./CompleteQuestButton";
 
 type QuestWithNpc = Quest & {

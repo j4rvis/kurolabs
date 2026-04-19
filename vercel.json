@@ -1,6 +1,6 @@
 {
   "installCommand": "pnpm install",
   "buildCommand": "pnpm --filter web build",
-  "outputDirectory": "verticals/questify/web/.next",
+  "outputDirectory": "web/.next",
   "framework": "nextjs"
 }

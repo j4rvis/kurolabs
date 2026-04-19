@@ -1,3 +1,4 @@
 packages:
+  - "web"
   - "verticals/*/web"
   - "shared/web"

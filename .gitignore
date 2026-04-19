@@ -42,3 +42,7 @@ npm-debug.log*
 *.g.dart
 *.freezed.dart
 .vercel
+# test-vertical mobile
+verticals/test-vertical/mobile/.dart_tool/
+verticals/test-vertical/mobile/.flutter-plugins
+verticals/test-vertical/mobile/.flutter-plugins-dependencies

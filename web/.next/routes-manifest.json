@@ -1,0 +1,200 @@
+{
+  "version": 3,
+  "pages404": true,
+  "appType": "app",
+  "caseSensitive": false,
+  "basePath": "",
+  "redirects": [
+    {
+      "source": "/:path+/",
+      "destination": "/:path+",
+      "internal": true,
+      "priority": true,
+      "statusCode": 308,
+      "regex": "^(?:/((?:[^/]+?)(?:/(?:[^/]+?))*))/$"
+    }
+  ],
+  "headers": [],
+  "onMatchHeaders": [],
+  "rewrites": {
+    "beforeFiles": [],
+    "afterFiles": [],
+    "fallback": []
+  },
+  "dynamicRoutes": [
+    {
+      "page": "/api/quest-givers/[id]",
+      "regex": "^/api/quest\\-givers/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/quest\\-givers/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/quest-givers/[id]/templates",
+      "regex": "^/api/quest\\-givers/([^/]+?)/templates(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/quest\\-givers/(?<nxtPid>[^/]+?)/templates(?:/)?$"
+    },
+    {
+      "page": "/api/quest-givers/[id]/verify",
+      "regex": "^/api/quest\\-givers/([^/]+?)/verify(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/quest\\-givers/(?<nxtPid>[^/]+?)/verify(?:/)?$"
+    },
+    {
+      "page": "/api/quests/[id]",
+      "regex": "^/api/quests/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/quests/(?<nxtPid>[^/]+?)(?:/)?$"
+    },
+    {
+      "page": "/api/quests/[id]/complete",
+      "regex": "^/api/quests/([^/]+?)/complete(?:/)?$",
+      "routeKeys": {
+        "nxtPid": "nxtPid"
+      },
+      "namedRegex": "^/api/quests/(?<nxtPid>[^/]+?)/complete(?:/)?$"
+    },
+    {
+      "page": "/api/village/[npcId]/connect",
+      "regex": "^/api/village/([^/]+?)/connect(?:/)?$",
+      "routeKeys": {
+        "nxtPnpcId": "nxtPnpcId"
+      },
+      "namedRegex": "^/api/village/(?<nxtPnpcId>[^/]+?)/connect(?:/)?$"
+    },
+    {
+      "page": "/api/village/[npcId]/quests",
+      "regex": "^/api/village/([^/]+?)/quests(?:/)?$",
+      "routeKeys": {
+        "nxtPnpcId": "nxtPnpcId"
+      },
+      "namedRegex": "^/api/village/(?<nxtPnpcId>[^/]+?)/quests(?:/)?$"
+    },
+    {
+      "page": "/dashboard/village/[slug]",
+      "regex": "^/dashboard/village/([^/]+?)(?:/)?$",
+      "routeKeys": {
+        "nxtPslug": "nxtPslug"
+      },
+      "namedRegex": "^/dashboard/village/(?<nxtPslug>[^/]+?)(?:/)?$"
+    }
+  ],
+  "staticRoutes": [
+    {
+      "page": "/",
+      "regex": "^/(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/(?:/)?$"
+    },
+    {
+      "page": "/_global-error",
+      "regex": "^/_global\\-error(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_global\\-error(?:/)?$"
+    },
+    {
+      "page": "/_not-found",
+      "regex": "^/_not\\-found(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/_not\\-found(?:/)?$"
+    },
+    {
+      "page": "/api/auth/callback",
+      "regex": "^/api/auth/callback(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/auth/callback(?:/)?$"
+    },
+    {
+      "page": "/api/character",
+      "regex": "^/api/character(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/character(?:/)?$"
+    },
+    {
+      "page": "/api/epics",
+      "regex": "^/api/epics(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/epics(?:/)?$"
+    },
+    {
+      "page": "/api/quest-givers",
+      "regex": "^/api/quest\\-givers(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/quest\\-givers(?:/)?$"
+    },
+    {
+      "page": "/api/quests",
+      "regex": "^/api/quests(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/quests(?:/)?$"
+    },
+    {
+      "page": "/api/village",
+      "regex": "^/api/village(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/api/village(?:/)?$"
+    },
+    {
+      "page": "/auth/login",
+      "regex": "^/auth/login(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/login(?:/)?$"
+    },
+    {
+      "page": "/auth/signup",
+      "regex": "^/auth/signup(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/auth/signup(?:/)?$"
+    },
+    {
+      "page": "/dashboard",
+      "regex": "^/dashboard(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard(?:/)?$"
+    },
+    {
+      "page": "/dashboard/quests",
+      "regex": "^/dashboard/quests(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/quests(?:/)?$"
+    },
+    {
+      "page": "/dashboard/village",
+      "regex": "^/dashboard/village(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/dashboard/village(?:/)?$"
+    },
+    {
+      "page": "/favicon.ico",
+      "regex": "^/favicon\\.ico(?:/)?$",
+      "routeKeys": {},
+      "namedRegex": "^/favicon\\.ico(?:/)?$"
+    }
+  ],
+  "dataRoutes": [],
+  "rsc": {
+    "header": "rsc",
+    "varyHeader": "rsc, next-router-state-tree, next-router-prefetch, next-router-segment-prefetch",
+    "prefetchHeader": "next-router-prefetch",
+    "didPostponeHeader": "x-nextjs-postponed",
+    "contentTypeHeader": "text/x-component",
+    "suffix": ".rsc",
+    "prefetchSegmentHeader": "next-router-segment-prefetch",
+    "prefetchSegmentSuffix": ".segment.rsc",
+    "prefetchSegmentDirSuffix": ".segments",
+    "clientParamParsing": false,
+    "dynamicRSCPrerender": false
+  },
+  "rewriteHeaders": {
+    "pathHeader": "x-nextjs-rewritten-path",
+    "queryHeader": "x-nextjs-rewritten-query"
+  }
+}

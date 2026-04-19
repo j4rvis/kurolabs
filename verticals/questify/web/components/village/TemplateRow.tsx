@@ -2,8 +2,8 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
-import { DifficultyBadge, FrequencyBadge } from "@/components/ui/Badge";
-import type { NpcQuestTemplate } from "@/lib/types";
+import { DifficultyBadge, FrequencyBadge } from "../ui/Badge";
+import type { NpcQuestTemplate } from "../../lib/types";
 
 type TemplateWithStatus = NpcQuestTemplate & {
   accepted_quest_id: string | null;

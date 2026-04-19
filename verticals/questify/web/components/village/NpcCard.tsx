@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { NpcQuestGiver } from "@/lib/types";
+import type { NpcQuestGiver } from "../../lib/types";
 
 type NpcWithConnection = NpcQuestGiver & { is_connected: boolean };
 

@@ -1,0 +1,3 @@
+{
+  "/(questify)/api/quest-givers/[id]/templates/route": "app/(questify)/api/quest-givers/[id]/templates/route.js"
+}

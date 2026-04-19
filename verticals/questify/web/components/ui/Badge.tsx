@@ -1,4 +1,4 @@
-import type { QuestDifficulty, QuestType, NpcQuestFrequency } from "@/lib/types";
+import type { QuestDifficulty, QuestType, NpcQuestFrequency } from "../../lib/types";
 
 const difficultyStyles: Record<QuestDifficulty, string> = {
   trivial:   "bg-[#6c757d]/20 text-[#9aa0a6] border-[#6c757d]/40",

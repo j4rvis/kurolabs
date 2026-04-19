@@ -64,7 +64,12 @@ scaffold_dir() {
   done
 }
 
-# ── scaffold each sub-app ─────────────────────────────────────────────────────
+# ── scaffold each module ──────────────────────────────────────────────────────
+# New verticals are MODULES, not standalone apps:
+#   web:    pnpm package "@<name>/web" exporting components/logic; no next.config.ts or auth routes
+#           The shell (web/) owns routing, auth, and the Next.js entry point.
+#   mobile: Dart package "<name>_module" exporting a ModuleConfig; no main.dart
+#           The shell (mobile/) owns auth, routing, and the Flutter entry point.
 if $DO_WEB; then
   scaffold_dir "$TEMPLATES/web" "$DEST/web"
 fi
@@ -86,11 +91,9 @@ if $DO_SUPABASE; then
 fi
 
 # ── update root .gitignore ────────────────────────────────────────────────────
+# Web modules don't have a .next/ build dir (the shell at web/ does).
+# Mobile modules don't have runner-level build artifacts.
 GITIGNORE="$REPO_ROOT/.gitignore"
-if $DO_WEB && ! grep -qF "verticals/$KEBAB/web/.next/" "$GITIGNORE" 2>/dev/null; then
-  printf '\n# %s web\nverticals/%s/web/.next/\nverticals/%s/web/out/\n' \
-    "$KEBAB" "$KEBAB" "$KEBAB" >> "$GITIGNORE"
-fi
 if $DO_MOBILE && ! grep -qF "verticals/$KEBAB/mobile/.dart_tool/" "$GITIGNORE" 2>/dev/null; then
   printf '# %s mobile\nverticals/%s/mobile/.dart_tool/\nverticals/%s/mobile/.flutter-plugins\nverticals/%s/mobile/.flutter-plugins-dependencies\n' \
     "$KEBAB" "$KEBAB" "$KEBAB" "$KEBAB" >> "$GITIGNORE"
