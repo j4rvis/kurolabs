@@ -1,3 +1,0 @@
-{
-  "/(questify)/api/quests/[id]/route": "app/(questify)/api/quests/[id]/route.js"
-}
