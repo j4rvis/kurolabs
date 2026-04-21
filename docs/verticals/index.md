@@ -33,6 +33,7 @@ verticals/<name>/
   mobile/                   # Dart package — feature screens + ModuleConfig, no app entry point
   supabase/                 # Vertical-specific migrations, edge functions, seed data
     migrations/             # Symlinks → shared/supabase/migrations/ + vertical-specific files
+  chrome-extension/         # Optional Manifest V3 extension for quick capture (omoi, future verticals)
 ```
 
 ## Shared schema
@@ -79,3 +80,4 @@ Name must be lowercase kebab-case. The script copies templates and substitutes t
 | Vertical | Status | Description |
 |----------|--------|-------------|
 | questify | Active | Habit/quest tracker with quests, epics, NPCs — see [questify.md](questify.md) |
+| omoi | In Progress | Personal thought capture with auto-tagging, connections, and Chrome extension — see [omoi.md](omoi.md) |

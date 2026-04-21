@@ -686,6 +686,13 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "2.1.0"
+  omoi_module:
+    dependency: "direct main"
+    description:
+      path: "../verticals/omoi/mobile"
+      relative: true
+    source: path
+    version: "0.1.0"
   os_detect:
     dependency: transitive
     description:

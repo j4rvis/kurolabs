@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install --filter omoi-web",
+  "buildCommand": "pnpm --filter omoi-web build",
+  "outputDirectory": "verticals/omoi/web/.next",
+  "framework": "nextjs"
+}

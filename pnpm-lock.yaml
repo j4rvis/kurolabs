@@ -24,6 +24,43 @@ importers:
         specifier: '>=16.0.0'
         version: 16.2.2(@babel/core@7.29.0)(react-dom@19.2.4(react@19.2.4))(react@19.2.4)
 
+  verticals/omoi/web:
+    dependencies:
+      '@kurolabs/web':
+        specifier: workspace:*
+        version: link:../../../shared/web
+      '@supabase/ssr':
+        specifier: ^0.10.0
+        version: 0.10.0(@supabase/supabase-js@2.101.1)
+      '@supabase/supabase-js':
+        specifier: ^2.101.1
+        version: 2.101.1
+      react:
+        specifier: 19.2.4
+        version: 19.2.4
+      react-dom:
+        specifier: 19.2.4
+        version: 19.2.4(react@19.2.4)
+      zod:
+        specifier: ^4.3.6
+        version: 4.3.6
+    devDependencies:
+      '@tailwindcss/postcss':
+        specifier: ^4
+        version: 4.2.2
+      '@types/node':
+        specifier: ^20
+        version: 20.19.39
+      '@types/react':
+        specifier: ^19
+        version: 19.2.14
+      '@types/react-dom':
+        specifier: ^19
+        version: 19.2.3(@types/react@19.2.14)
+      typescript:
+        specifier: ^5
+        version: 5.9.3
+
   verticals/questify/web:
     dependencies:
       '@kurolabs/web':
@@ -103,6 +140,9 @@ importers:
       '@kurolabs/web':
         specifier: workspace:*
         version: link:../shared/web
+      '@omoi/web':
+        specifier: workspace:*
+        version: link:../verticals/omoi/web
       '@questify/web':
         specifier: workspace:*
         version: link:../verticals/questify/web

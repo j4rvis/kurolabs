@@ -19,6 +19,8 @@ dependencies:
     path: ../shared/mobile/packages/kurolabs_hub
 
   # Vertical modules
+  omoi_module:
+    path: ../verticals/omoi/mobile
   questify_module:
     path: ../verticals/questify/mobile
   user_management_module:

@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@kurolabs/web": "workspace:*",
+    "@omoi/web": "workspace:*",
     "@questify/web": "workspace:*",
     "@user-management/web": "workspace:*",
     "@supabase/ssr": "^0.10.0",

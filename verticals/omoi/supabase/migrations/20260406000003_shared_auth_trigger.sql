@@ -1,0 +1,1 @@
+/Users/micha/code/kurolabs/shared/supabase/migrations/20260406000003_shared_auth_trigger.sql

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Omoi</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      width: 320px;
+      padding: 16px;
+      background: #0f0f0f;
+      color: #e8e8e8;
+    }
+    h1 { font-size: 16px; font-weight: 600; margin-bottom: 12px; color: #a78bfa; }
+    textarea {
+      width: 100%;
+      height: 100px;
+      padding: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      color: #e8e8e8;
+      font-size: 14px;
+      resize: none;
+      outline: none;
+    }
+    textarea:focus { border-color: #a78bfa; }
+    button {
+      margin-top: 10px;
+      width: 100%;
+      padding: 10px;
+      background: #7c3aed;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 500;
+      cursor: pointer;
+    }
+    button:hover { background: #6d28d9; }
+    button:disabled { background: #333; color: #666; cursor: default; }
+    #status {
+      margin-top: 10px;
+      font-size: 13px;
+      text-align: center;
+      min-height: 18px;
+    }
+    #status.success { color: #34d399; }
+    #status.error { color: #f87171; }
+    #not-logged-in { display: none; text-align: center; }
+    #not-logged-in p { font-size: 13px; color: #aaa; margin-bottom: 10px; }
+    #not-logged-in a { color: #a78bfa; text-decoration: none; }
+    #capture-form { display: none; }
+  </style>
+</head>
+<body>
+  <h1>想い · Omoi</h1>
+
+  <div id="not-logged-in">
+    <p>You're not logged in.<br>Open Omoi in your browser to sign in.</p>
+    <a id="open-app-link" href="#" target="_blank">Open Omoi →</a>
+  </div>
+
+  <div id="capture-form">
+    <textarea id="thought-input" placeholder="What's on your mind?" autofocus></textarea>
+    <button id="submit-btn">Capture thought</button>
+    <div id="status"></div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>

@@ -55,3 +55,7 @@ verticals/test-vertical/mobile/.flutter-plugins-dependencies
 verticals/user-management/mobile/.dart_tool/
 verticals/user-management/mobile/.flutter-plugins
 verticals/user-management/mobile/.flutter-plugins-dependencies
+# omoi mobile
+verticals/omoi/mobile/.dart_tool/
+verticals/omoi/mobile/.flutter-plugins
+verticals/omoi/mobile/.flutter-plugins-dependencies

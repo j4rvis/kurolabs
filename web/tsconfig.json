@@ -22,7 +22,9 @@
     "paths": {
       "@/*": ["./*"],
       "@questify/web": ["../verticals/questify/web"],
-      "@questify/web/*": ["../verticals/questify/web/*"]
+      "@questify/web/*": ["../verticals/questify/web/*"],
+      "@omoi/web": ["../verticals/omoi/web"],
+      "@omoi/web/*": ["../verticals/omoi/web/*"]
     }
   },
   "include": [

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 import 'package:kurolabs_auth/kurolabs_auth.dart';
 import 'package:kurolabs_hub/kurolabs_hub.dart';
+import 'package:omoi_module/omoi_module.dart';
 import 'package:questify_module/questify_module.dart';
 import 'package:user_management_module/user_management_module.dart';
 import '../core/constants/app_colors.dart';
@@ -38,6 +39,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           modules: registeredModules,
         ),
       ),
+      ...omoiRoutes,
       ...questifyRoutes,
       ...userManagementRoutes,
     ],
