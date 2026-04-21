@@ -70,7 +70,7 @@ export default async function NpcDetailPage({
     <div className="max-w-2xl">
       {/* Back link */}
       <Link
-        href="/dashboard/village"
+        href="/hub/questify/village"
         className="text-parchment-muted hover:text-parchment text-sm transition-colors mb-6 inline-flex items-center gap-1"
       >
         ← Village

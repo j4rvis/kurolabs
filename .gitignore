@@ -29,6 +29,11 @@ supabase/functions/.deno/
 # macOS
 .DS_Store
 
+# Obsidian
+obsidian/.obsidian/workspace.json
+obsidian/.obsidian/workspace-mobile.json
+obsidian/.obsidian/cache
+
 # IDEs
 .vscode/
 .idea/
@@ -46,3 +51,7 @@ npm-debug.log*
 verticals/test-vertical/mobile/.dart_tool/
 verticals/test-vertical/mobile/.flutter-plugins
 verticals/test-vertical/mobile/.flutter-plugins-dependencies
+# user-management mobile
+verticals/user-management/mobile/.dart_tool/
+verticals/user-management/mobile/.flutter-plugins
+verticals/user-management/mobile/.flutter-plugins-dependencies

@@ -6,7 +6,7 @@ type NpcWithConnection = NpcQuestGiver & { is_connected: boolean };
 
 export default function NpcCard({ npc }: { npc: NpcWithConnection }) {
   return (
-    <Link href={`/dashboard/village/${npc.slug}`}>
+    <Link href={`/hub/questify/village/${npc.slug}`}>
       <div className="bg-tavern-light border border-tavern-border rounded-lg p-4 flex flex-col items-center gap-3 hover:border-gold/50 transition-colors cursor-pointer group">
         <div className="relative w-20 h-20 rounded-full overflow-hidden border-2 border-tavern-border group-hover:border-gold/50 transition-colors bg-tavern-mid flex-shrink-0">
           <Image

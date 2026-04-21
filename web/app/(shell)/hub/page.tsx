@@ -4,8 +4,15 @@ const verticals = [
   {
     name: "Questify",
     description: "Turn your daily habits into epic quests",
-    href: "/dashboard/quests",
+    href: "/hub/questify/quests",
     icon: "⚔️",
+    color: "bg-tavern-mid border-tavern-border",
+  },
+  {
+    name: "User Management",
+    description: "Manage your profile, account, and character",
+    href: "/hub/user-management",
+    icon: "👤",
     color: "bg-tavern-mid border-tavern-border",
   },
 ];

@@ -63,7 +63,7 @@ export default function QuestBoard({ quests }: { quests: QuestWithNpc[] }) {
           <p className="text-parchment-muted text-lg mb-2">No quests found</p>
           <p className="text-parchment-muted text-sm">
             Visit the{" "}
-            <a href="/dashboard/village" className="text-gold hover:text-gold-light transition-colors">
+            <a href="/hub/questify/village" className="text-gold hover:text-gold-light transition-colors">
               Village
             </a>{" "}
             to accept quests from NPCs.

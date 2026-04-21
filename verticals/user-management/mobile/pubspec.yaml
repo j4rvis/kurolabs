@@ -1,7 +1,7 @@
-name: kurolabs
-description: "KuroLabs shell app — adventure hub for all verticals"
+name: user_management_module
+description: "UserManagement feature module for KuroLabs"
 publish_to: 'none'
-version: 1.0.0+1
+version: 0.1.0
 
 environment:
   sdk: ^3.11.4
@@ -10,19 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
 
-  cupertino_icons: ^1.0.8
-
   # Shared KuroLabs packages
   kurolabs_auth:
-    path: ../shared/mobile/packages/kurolabs_auth
+    path: ../../../shared/mobile/packages/kurolabs_auth
   kurolabs_hub:
-    path: ../shared/mobile/packages/kurolabs_hub
-
-  # Vertical modules
-  questify_module:
-    path: ../verticals/questify/mobile
-  user_management_module:
-    path: ../verticals/user-management/mobile
+    path: ../../../shared/mobile/packages/kurolabs_hub
 
   # Supabase
   supabase_flutter: ^2.9.0
@@ -34,17 +26,9 @@ dependencies:
   # Routing
   go_router: ^15.1.2
 
-  # In-app updates
-  in_app_update: ^4.2.3
-  upgrader: ^10.3.0
-
   # UI / theming
   google_fonts: ^6.2.1
   flutter_animate: ^4.5.2
-  cached_network_image: ^3.4.1
-
-  # Charts (character sheet radar/bar charts)
-  fl_chart: ^0.70.2
 
   # HTTP client for Next.js API
   http: ^1.2.0
@@ -52,6 +36,7 @@ dependencies:
   # Utilities
   intl: ^0.20.2
   uuid: ^4.5.1
+  cupertino_icons: ^1.0.8
 
 dev_dependencies:
   flutter_test:
@@ -63,6 +48,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-  assets:
-    - assets/npc/

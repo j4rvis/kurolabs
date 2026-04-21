@@ -4,6 +4,7 @@ import 'package:go_router/go_router.dart';
 import 'package:kurolabs_auth/kurolabs_auth.dart';
 import 'package:kurolabs_hub/kurolabs_hub.dart';
 import 'package:questify_module/questify_module.dart';
+import 'package:user_management_module/user_management_module.dart';
 import '../core/constants/app_colors.dart';
 import '../features/shell/auth/login_screen.dart';
 import '../features/shell/auth/signup_screen.dart';
@@ -38,6 +39,7 @@ final routerProvider = Provider<GoRouter>((ref) {
         ),
       ),
       ...questifyRoutes,
+      ...userManagementRoutes,
     ],
   );
 });

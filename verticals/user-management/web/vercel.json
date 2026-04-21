@@ -1,0 +1,6 @@
+{
+  "installCommand": "pnpm install --filter user-management-web",
+  "buildCommand": "pnpm --filter user-management-web build",
+  "outputDirectory": "verticals/user-management/web/.next",
+  "framework": "nextjs"
+}

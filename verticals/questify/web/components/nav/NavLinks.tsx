@@ -4,8 +4,8 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const links = [
-  { href: "/dashboard/quests", label: "Quest Board" },
-  { href: "/dashboard/village", label: "Village" },
+  { href: "/hub/questify/quests", label: "Quest Board" },
+  { href: "/hub/questify/village", label: "Village" },
 ];
 
 export default function NavLinks() {

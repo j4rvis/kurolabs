@@ -13,7 +13,7 @@ export default async function DashboardNav() {
     <nav className="bg-tavern-light border-b border-tavern-border px-4 sm:px-6 py-3 flex items-center justify-between">
       <div className="flex items-center gap-1">
         <Link
-          href="/dashboard/quests"
+          href="/hub/questify/quests"
           className="font-display text-xl text-gold tracking-widest mr-4 sm:mr-8"
         >
           QUESTIFY
