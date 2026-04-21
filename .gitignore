@@ -11,8 +11,8 @@ node_modules/
 .pnpm-store/
 
 # Next.js
-apps/web/.next/
-apps/web/out/
+web/.next/
+web/out/
 
 # Flutter
 apps/mobile/.dart_tool/
