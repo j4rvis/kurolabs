@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Omoi — 想</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body {
+  font-family:'Syne Mono',monospace;
+  background-color:#f5f0e8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color:#1c1612;
+  min-height:100vh;
+}
+textarea,button,input{font-family:'Syne Mono',monospace;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const { useState, useRef } = React;
+
+const T = {
+  paper: '#f5f0e8',
+  raised: '#faf8f3',
+  sunken: '#ede7da',
+  border: '#d0c4b0',
+  divider: '#e2dbd0',
+  ink1: '#1c1612',
+  ink2: '#5c4f3d',
+  ink3: '#9c8c78',
+  ink4: '#c4b8a6',
+  accent: '#3d5a9e',
+  accentSoft: '#dce4f5',
+  accentLight: '#8099cc',
+};
+
+const CATS = {
+  Philosophy: { bg:'#ede8f5', color:'#5840a0', border:'#c8b8e8' },
+  Reading:    { bg:'#eaf4ee', color:'#3d7a52', border:'#b8d9c4' },
+  Ideas:      { bg:'#e8f0f9', color:'#2d5a8e', border:'#b0c8e8' },
+  Writing:    { bg:'#f9ece4', color:'#b85a20', border:'#e0b898' },
+  General:    { bg:'#f0ede8', color:'#8c7a68', border:'#d0c4b0' },
+};
+
+function timeAgo(ms) {
+  const diff = Date.now() - ms;
+  const m = Math.floor(diff/60000);
+  if (m < 1) return 'just now';
+  if (m < 60) return `${m}m ago`;
+  const h = Math.floor(m/60);
+  if (h < 24) return `${h}h ago`;
+  return `${Math.floor(h/24)}d ago`;
+}
+
+const SAMPLE = [
+  { id:1, content:"The Japanese concept of ma (間) — negative space, the pause between notes — feels relevant to how I want to design. Emptiness as intentional structure, not absence.", category:'Philosophy', tags:['design','japan','space'], ts: Date.now()-7200000 },
+  { id:2, content:"Finished reading Piranesi. The house is an allegory for memory — each hall a different era, the statues like neurons firing across time.", category:'Reading', tags:['books','memory','piranesi'], ts: Date.now()-86400000 },
+  { id:3, content:"Idea: a habit tracker that frames each habit as a quest you receive from an NPC character. Different characters for different life domains.", category:'Ideas', tags:['apps','habits','gamification'], ts: Date.now()-3*86400000 },
+  { id:4, content:"First drafts are supposed to be bad. The whole point is getting the raw material out so you have something to sculpt.", category:'Writing', tags:['writing','craft'], ts: Date.now()-5*86400000 },
+  { id:5, content:"Wabi-sabi — beauty in imperfection and transience. A philosophy that accepts incompleteness rather than fighting it.", category:'Philosophy', tags:['japan','aesthetics'], ts: Date.now()-7*86400000 },
+];
+
+function CatBadge({ cat }) {
+  const s = CATS[cat] || CATS.General;
+  return <span style={{ display:'inline-flex', alignItems:'center', padding:'2px 7px', borderRadius:2, fontSize:10, letterSpacing:'.04em', background:s.bg, color:s.color, border:`1px solid ${s.border}` }}>{cat}</span>;
+}
+
+function Tag({ tag, active, onClick }) {
+  return (
+    <span onClick={onClick} style={{
+      fontSize:10, letterSpacing:'.04em',
+      color: active ? T.accent : T.ink3,
+      background: active ? T.accentSoft : T.sunken,
+      border: `1px solid ${active ? T.accent : T.divider}`,
+      padding:'2px 7px', borderRadius:2, cursor:'pointer',
+      transition:'all .15s',
+    }}>#{tag}</span>
+  );
+}
+
+function ThoughtCard({ t, onClick, activeTag, onTag }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div onClick={() => onClick(t)}
+      onMouseEnter={() => setHov(true)} onMouseLeave={() => setHov(false)}
+      style={{ background:T.raised, border:`1px solid ${hov?T.border:T.divider}`, borderRadius:4, padding:18, cursor:'pointer', transition:'border-color .15s' }}>
+      <p style={{ fontSize:12, color:T.ink2, lineHeight:1.7, letterSpacing:'.02em', display:'-webkit-box', WebkitLineClamp:3, WebkitBoxOrient:'vertical', overflow:'hidden' }}>{t.content}</p>
+      <div style={{ display:'flex', alignItems:'center', gap:6, marginTop:12, flexWrap:'wrap' }}>
+        <CatBadge cat={t.category} />
+        {t.tags.slice(0,4).map(tag => <Tag key={tag} tag={tag} active={activeTag===tag} onClick={e=>{e.stopPropagation();onTag(tag);}} />)}
+        <span style={{ marginLeft:'auto', fontSize:10, color:T.ink4 }}>{timeAgo(t.ts)}</span>
+      </div>
+    </div>
+  );
+}
+
+function ThoughtDetail({ t, onBack }) {
+  return (
+    <div style={{ maxWidth:680, margin:'0 auto', padding:'32px 24px' }}>
+      <button onClick={onBack} style={{ background:'transparent', border:'none', color:T.ink3, fontSize:11, letterSpacing:'.06em', cursor:'pointer', marginBottom:24, padding:0 }}>← back</button>
+      <div style={{ background:T.raised, border:`1px solid ${T.border}`, borderRadius:4, padding:28 }}>
+        <p style={{ fontSize:14, color:T.ink1, lineHeight:1.8, letterSpacing:'.02em' }}>{t.content}</p>
+        <div style={{ marginTop:20, paddingTop:16, borderTop:`1px solid ${T.divider}`, display:'flex', alignItems:'center', gap:8, flexWrap:'wrap' }}>
+          <CatBadge cat={t.category} />
+          {t.tags.map(tag => <Tag key={tag} tag={tag} />)}
+          <span style={{ marginLeft:'auto', fontSize:10, color:T.ink4 }}>{new Date(t.ts).toLocaleDateString('en-US',{month:'long',day:'numeric',year:'numeric'})}</span>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function Dashboard() {
+  const [thoughts, setThoughts] = useState(SAMPLE);
+  const [content, setContent] = useState('');
+  const [activeTag, setActiveTag] = useState(null);
+  const [detail, setDetail] = useState(null);
+  const ref = useRef(null);
+
+  const allTags = [...new Set(thoughts.flatMap(t=>t.tags))];
+  const filtered = activeTag ? thoughts.filter(t=>t.tags.includes(activeTag)) : thoughts;
+  const stats = { total: thoughts.length, today: thoughts.filter(t=>Date.now()-t.ts<86400000).length, connections: 28 };
+
+  const capture = () => {
+    if (!content.trim()) return;
+    setThoughts(p => [{ id:Date.now(), content:content.trim(), category:'General', tags:[], ts:Date.now() }, ...p]);
+    setContent('');
+  };
+
+  const toggleTag = tag => setActiveTag(p => p===tag ? null : tag);
+
+  if (detail) return <ThoughtDetail t={detail} onBack={()=>setDetail(null)} />;
+
+  return (
+    <div style={{ maxWidth:760, margin:'0 auto', padding:'32px 24px' }}>
+      {/* Header */}
+      <div style={{ display:'flex', alignItems:'flex-end', justifyContent:'space-between', marginBottom:32, paddingBottom:20, borderBottom:`1px solid ${T.divider}` }}>
+        <div>
+          <div style={{ fontFamily:"'Cinzel',serif", fontSize:28, color:T.accent, lineHeight:1, marginBottom:6, opacity:.25 }}>想</div>
+          <div style={{ fontSize:18, color:T.ink1, letterSpacing:'.1em' }}>OMOI</div>
+          <div style={{ fontSize:10, color:T.ink3, marginTop:4, letterSpacing:'.06em' }}>inner knowledge base</div>
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:1, border:`1px solid ${T.divider}`, borderRadius:2, overflow:'hidden' }}>
+          {Object.entries(stats).map(([k,v]) => (
+            <div key={k} style={{ padding:'10px 16px', background:T.raised, textAlign:'center', borderRight:`1px solid ${T.divider}` }}>
+              <div style={{ fontSize:16, color:T.accent, letterSpacing:'.02em' }}>{v}</div>
+              <div style={{ fontSize:9, color:T.ink3, marginTop:2, letterSpacing:'.08em' }}>{k}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+
+      {/* Capture */}
+      <div style={{ marginBottom:20 }}>
+        <textarea
+          ref={ref}
+          value={content}
+          onChange={e=>setContent(e.target.value)}
+          onKeyDown={e=>{if(e.key==='Enter'&&(e.metaKey||e.ctrlKey))capture();}}
+          placeholder="What's on your mind? (⌘↵ to save)"
+          style={{ width:'100%', height:72, background:T.raised, border:`1px solid ${content?T.accent:T.border}`, borderRadius:4, padding:'12px 14px', fontSize:12, color:T.ink1, resize:'none', outline:'none', lineHeight:1.6, letterSpacing:'.02em', transition:'border-color .15s', caretColor:T.accent }}
+        />
+        <div style={{ display:'flex', justifyContent:'flex-end', marginTop:8 }}>
+          <button onClick={capture} disabled={!content.trim()} style={{ background:content.trim()?T.accent:T.sunken, color:content.trim()?'#fff':T.ink4, border:`1px solid ${content.trim()?T.accent:T.divider}`, borderRadius:2, padding:'7px 18px', fontSize:10, letterSpacing:'.08em', cursor:content.trim()?'pointer':'default', transition:'all .15s' }}>
+            capture
+          </button>
+        </div>
+      </div>
+
+      {/* Tags */}
+      {allTags.length > 0 && (
+        <div style={{ display:'flex', flexWrap:'wrap', gap:6, marginBottom:20 }}>
+          {allTags.slice(0,10).map(tag => <Tag key={tag} tag={tag} active={activeTag===tag} onClick={()=>toggleTag(tag)} />)}
+          {activeTag && <button onClick={()=>setActiveTag(null)} style={{ fontSize:10, color:T.ink4, background:'transparent', border:'none', cursor:'pointer', letterSpacing:'.04em' }}>clear ×</button>}
+        </div>
+      )}
+
+      {/* List */}
+      <div style={{ display:'flex', flexDirection:'column', gap:8 }}>
+        {filtered.map(t => <ThoughtCard key={t.id} t={t} onClick={setDetail} activeTag={activeTag} onTag={toggleTag} />)}
+        {filtered.length===0 && <div style={{ textAlign:'center', padding:'48px 0', fontSize:11, color:T.ink3 }}>No thoughts yet. Capture your first one above.</div>}
+      </div>
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<Dashboard />);
+</script>
+</body>
+</html>

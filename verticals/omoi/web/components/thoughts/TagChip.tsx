@@ -14,7 +14,7 @@ export function TagChip({ tag, onClick, active }: TagChipProps) {
 
   return (
     <button
-      onClick={onClick}
+      onClick={(e) => { e.stopPropagation(); onClick?.(); }}
       className={`${base} ${style} ${onClick ? "cursor-pointer" : "cursor-default"}`}
       type="button"
     >

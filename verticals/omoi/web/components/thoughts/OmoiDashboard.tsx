@@ -125,7 +125,7 @@ export function OmoiDashboard({ initialThoughts, initialTotal, initialStats }: O
         page={page}
         limit={LIMIT}
         onPageChange={(p) => loadPage(p, tagFilter)}
-        onThoughtClick={(id) => router.push(`/omoi/thoughts/${id}`)}
+        onThoughtClick={(id) => router.push(`/hub/omoi/thoughts/${id}`)}
         onTagFilter={(tag) => { setTagFilter(tag); loadPage(1, tag); }}
       />
     </div>

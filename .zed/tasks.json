@@ -1,14 +1,14 @@
 [
   {
     "label": "Web: dev server",
-    "command": "cd $ZED_WORKTREE_ROOT/apps/web && pnpm dev",
+    "command": "cd $ZED_WORKTREE_ROOT/web && pnpm dev",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
     "reveal": "always"
   },
   {
     "label": "Flutter: connect ADB + run",
-    "command": "adb connect 192.168.178.23:44125 && cd $ZED_WORKTREE_ROOT/apps/mobile && flutter run --dart-define-from-file=.env --dart-define=API_BASE_URL=http://$(ipconfig getifaddr en0):3000",
+    "command": "adb connect 192.168.178.23:44125 && cd $ZED_WORKTREE_ROOT/mobile && flutter run --dart-define-from-file=.env --dart-define=API_BASE_URL=http://$(ipconfig getifaddr en0):3000",
     "use_new_terminal": true,
     "allow_concurrent_runs": false,
     "reveal": "always"

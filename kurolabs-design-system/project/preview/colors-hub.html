@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:16px; }
+.row { display:flex; gap:8px; margin-bottom:8px; }
+.swatch { flex:1; border-radius:2px; height:52px; display:flex; align-items:flex-end; padding:5px 8px; }
+.swatch span { font-size:9px; opacity:.7; }
+.label { font-size:9px; color:#9c8c78; margin-bottom:5px; letter-spacing:.1em; text-transform:uppercase; }
+</style></head>
+<body>
+<div class="label">Paper Surfaces</div>
+<div class="row">
+  <div class="swatch" style="background:#f5f0e8;border:1px solid #d0c4b0"><span style="color:#5c4f3d">--paper</span></div>
+  <div class="swatch" style="background:#faf8f3;border:1px solid #d0c4b0"><span style="color:#5c4f3d">--paper-raised</span></div>
+  <div class="swatch" style="background:#ede7da;border:1px solid #d0c4b0"><span style="color:#5c4f3d">--paper-sunken</span></div>
+  <div class="swatch" style="background:#d0c4b0"><span style="color:#1c1612">--paper-border</span></div>
+</div>
+<div class="label">Ink Scale</div>
+<div class="row">
+  <div class="swatch" style="background:#1c1612"><span style="color:#f5f0e8">--ink-1</span></div>
+  <div class="swatch" style="background:#5c4f3d"><span style="color:#f5f0e8">--ink-2</span></div>
+  <div class="swatch" style="background:#9c8c78"><span style="color:#f5f0e8">--ink-3</span></div>
+  <div class="swatch" style="background:#c4b8a6"><span style="color:#1c1612">--ink-4</span></div>
+</div>
+<div class="label">App Accents</div>
+<div class="row">
+  <div class="swatch" style="background:#b07030"><span style="color:#fff">Hub — amber</span></div>
+  <div class="swatch" style="background:#b83c3c"><span style="color:#fff">Questify — vermilion</span></div>
+  <div class="swatch" style="background:#3d5a9e"><span style="color:#fff">Omoi — indigo</span></div>
+</div>
+<div class="row">
+  <div class="swatch" style="background:#f0e2c8;border:1px solid #e0c89a"><span style="color:#b07030">--hub-accent-soft</span></div>
+  <div class="swatch" style="background:#f5e0e0;border:1px solid #e0a8a8"><span style="color:#b83c3c">--quest-accent-soft</span></div>
+  <div class="swatch" style="background:#dce4f5;border:1px solid #b0c8e8"><span style="color:#3d5a9e">--omoi-accent-soft</span></div>
+</div>
+</body></html>

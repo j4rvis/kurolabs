@@ -59,10 +59,7 @@ export function ThoughtList({
               <TagChip
                 key={tag}
                 tag={tag}
-                onClick={(e) => {
-                  (e as unknown as Event).stopPropagation?.();
-                  onTagFilter(tag);
-                }}
+                onClick={() => onTagFilter(tag)}
               />
             ))}
             <span className="text-zinc-600 text-xs ml-auto">{timeAgo(t.created_at)}</span>

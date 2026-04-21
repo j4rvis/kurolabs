@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KuroLabs Hub</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body {
+  font-family:'Syne Mono',monospace;
+  background-color:#f5f0e8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color:#1c1612;
+  min-height:100vh;
+}
+a{text-decoration:none;color:inherit;}
+button{font-family:'Syne Mono',monospace;cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const { useState } = React;
+
+const PAPER = '#f5f0e8';
+const RAISED = '#faf8f3';
+const BORDER = '#d0c4b0';
+const DIVIDER = '#e2dbd0';
+const INK1 = '#1c1612';
+const INK2 = '#5c4f3d';
+const INK3 = '#9c8c78';
+
+const APPS = [
+  {
+    id: 'questify',
+    kanji: '冒',
+    name: 'Questify',
+    romaji: 'bōken',
+    desc: 'Turn daily habits into epic quests',
+    accent: '#b83c3c',
+    soft: '#f5e0e0',
+  },
+  {
+    id: 'omoi',
+    kanji: '想',
+    name: 'Omoi',
+    romaji: 'omoi',
+    desc: 'Capture thoughts, ideas, and insights',
+    accent: '#3d5a9e',
+    soft: '#dce4f5',
+  },
+  {
+    id: 'profile',
+    kanji: '人',
+    name: 'Profile',
+    romaji: 'hito',
+    desc: 'Manage your account and character',
+    accent: '#b07030',
+    soft: '#f0e2c8',
+  },
+];
+
+function AppCard({ app, onClick }) {
+  const [hov, setHov] = useState(false);
+  return (
+    <div
+      onClick={onClick}
+      onMouseEnter={() => setHov(true)}
+      onMouseLeave={() => setHov(false)}
+      style={{
+        background: hov ? RAISED : PAPER,
+        border: `1px solid ${hov ? app.accent : BORDER}`,
+        borderRadius: 4,
+        padding: '28px 24px',
+        cursor: 'pointer',
+        transition: 'border-color .2s, background .2s',
+        display: 'flex',
+        flexDirection: 'column',
+        gap: 16,
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      {/* Kanji watermark */}
+      <div style={{
+        position: 'absolute', top: -8, right: 12,
+        fontFamily: "'Cinzel',serif",
+        fontSize: 80,
+        color: hov ? app.accent : DIVIDER,
+        opacity: hov ? .15 : .6,
+        userSelect: 'none',
+        transition: 'color .2s, opacity .2s',
+        lineHeight: 1,
+        pointerEvents: 'none',
+      }}>{app.kanji}</div>
+
+      <div>
+        <div style={{ fontSize: 11, color: INK3, letterSpacing: '.12em', marginBottom: 6 }}>{app.romaji}</div>
+        <div style={{ fontSize: 18, color: hov ? app.accent : INK1, letterSpacing: '.06em', transition: 'color .2s' }}>{app.name}</div>
+      </div>
+      <div style={{ fontSize: 11, color: INK2, lineHeight: 1.6 }}>{app.desc}</div>
+      <div style={{ fontSize: 10, color: hov ? app.accent : INK3, letterSpacing: '.1em', transition: 'color .2s' }}>
+        {hov ? 'enter →' : '· · ·'}
+      </div>
+    </div>
+  );
+}
+
+function HubPage({ onNav }) {
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', padding: '48px 24px' }}>
+      {/* Logo */}
+      <div style={{ textAlign: 'center', marginBottom: 64 }}>
+        <div style={{ fontFamily: "'Cinzel',serif", fontSize: 11, color: INK3, letterSpacing: '.3em', textTransform: 'uppercase', marginBottom: 12 }}>黒ラボ</div>
+        <div style={{ fontFamily: "'Syne Mono',monospace", fontSize: 28, color: INK1, letterSpacing: '.2em', textTransform: 'uppercase', fontWeight: 400 }}>KUROLABS</div>
+        <div style={{ width: 48, height: 1, background: BORDER, margin: '16px auto 0' }} />
+      </div>
+
+      {/* App grid */}
+      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(3, 280px)', gap: 16, maxWidth: 900 }}>
+        {APPS.map(app => (
+          <AppCard key={app.id} app={app} onClick={() => onNav(app.id)} />
+        ))}
+      </div>
+
+      <div style={{ marginTop: 64, fontSize: 10, color: INK3, letterSpacing: '.15em' }}>v 0.1 · choose your path</div>
+    </div>
+  );
+}
+
+function PlaceholderPage({ app, onBack }) {
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', gap: 24 }}>
+      <div style={{ fontFamily: "'Cinzel',serif", fontSize: 64, color: app.accent, opacity: .2 }}>{app.kanji}</div>
+      <div style={{ fontSize: 20, color: INK1, letterSpacing: '.1em' }}>{app.name}</div>
+      <div style={{ fontSize: 11, color: INK3 }}>see the {app.name} UI kit</div>
+      <button onClick={onBack} style={{ marginTop: 8, background: 'transparent', border: `1px solid ${BORDER}`, color: INK2, borderRadius: 2, padding: '8px 20px', fontSize: 11, letterSpacing: '.06em', cursor: 'pointer' }}>← hub</button>
+    </div>
+  );
+}
+
+function App() {
+  const [screen, setScreen] = useState('hub');
+  const active = APPS.find(a => a.id === screen);
+  if (screen !== 'hub' && active) return <PlaceholderPage app={active} onBack={() => setScreen('hub')} />;
+  return <HubPage onNav={setScreen} />;
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>
