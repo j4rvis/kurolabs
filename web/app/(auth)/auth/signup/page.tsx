@@ -15,13 +15,19 @@ export default function SignupPage() {
     setError(null);
     setLoading(true);
     const fd = new FormData(e.currentTarget);
-    const { error } = await supabase.auth.signUp({
-      email: fd.get("email") as string,
+    const email = fd.get("email") as string;
+    const { data, error } = await supabase.auth.signUp({
+      email,
       password: fd.get("password") as string,
     });
     if (error) {
       setError(error.message);
       setLoading(false);
+    } else if (data.user && !data.session) {
+      // Either new signup awaiting confirmation, or existing unconfirmed account.
+      // Resend in case it's the latter so the email always arrives.
+      await supabase.auth.resend({ type: "signup", email });
+      setSuccess(true);
     } else {
       setSuccess(true);
     }

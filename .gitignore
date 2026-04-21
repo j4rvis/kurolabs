@@ -15,12 +15,12 @@ web/.next/
 web/out/
 
 # Flutter
-apps/mobile/.dart_tool/
-apps/mobile/.flutter-plugins
-apps/mobile/.flutter-plugins-dependencies
-apps/mobile/build/
-apps/mobile/.packages
-apps/mobile/pubspec.lock
+mobile/.dart_tool/
+mobile/.flutter-plugins
+mobile/.flutter-plugins-dependencies
+mobile/build/
+mobile/.packages
+mobile/pubspec.lock
 
 # Supabase
 supabase/.temp/
