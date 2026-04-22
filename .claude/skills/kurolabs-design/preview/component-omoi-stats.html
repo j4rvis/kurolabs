@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:16px; }
+.stats { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; border:1px solid #d0c4b0; border-radius:2px; overflow:hidden; margin-bottom:12px; }
+.stat { background:#faf8f3; padding:12px; text-align:center; border-right:1px solid #e2dbd0; }
+.stat:last-child{border-right:none;}
+.tags { display:flex; flex-wrap:wrap; gap:6px; }
+.tag { font-size:10px; color:#9c8c78; background:#ede7da; border:1px solid #e2dbd0; padding:3px 8px; border-radius:2px; cursor:pointer; }
+.tag.active { background:#dce4f5; color:#3d5a9e; border-color:#3d5a9e; }
+</style></head>
+<body>
+<div class="stats">
+  <div class="stat"><div style="font-size:18px;color:#3d5a9e">142</div><div style="font-size:9px;color:#9c8c78;margin-top:3px;letter-spacing:.08em">total</div></div>
+  <div class="stat"><div style="font-size:18px;color:#3d5a9e">3</div><div style="font-size:9px;color:#9c8c78;margin-top:3px;letter-spacing:.08em">today</div></div>
+  <div class="stat"><div style="font-size:18px;color:#3d5a9e">28</div><div style="font-size:9px;color:#9c8c78;margin-top:3px;letter-spacing:.08em">connections</div></div>
+</div>
+<div class="tags">
+  <span class="tag active">#design</span>
+  <span class="tag">#japan</span>
+  <span class="tag">#focus</span>
+  <span class="tag">#books</span>
+  <span class="tag">#ideas</span>
+  <span class="tag">#writing</span>
+</div>
+</body></html>

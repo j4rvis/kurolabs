@@ -43,14 +43,14 @@ export default function TemplateRow({
   }
 
   return (
-    <div className="bg-tavern border border-tavern-border rounded-lg p-4 flex flex-col gap-3">
+    <div className="bg-paper-raised border border-paper-border rounded-[4px] p-[20px] flex flex-col gap-3">
       <div className="flex items-start justify-between gap-3">
         <div className="flex-1 min-w-0">
-          <h4 className="text-parchment text-sm font-medium leading-snug">
+          <h4 className="text-ink-1 text-[12px] tracking-[.03em] leading-snug">
             {template.title}
           </h4>
           {template.description && (
-            <p className="text-parchment-muted text-xs mt-1 leading-relaxed">
+            <p className="text-ink-3 text-[10px] mt-1 leading-relaxed">
               {template.description}
             </p>
           )}
@@ -58,25 +58,25 @@ export default function TemplateRow({
         <button
           onClick={handleToggle}
           disabled={loading}
-          className={`text-xs font-semibold px-3 py-1.5 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
+          className={`text-[10px] tracking-[.06em] px-[10px] py-[4px] rounded-[2px] border transition-all disabled:opacity-50 disabled:cursor-not-allowed flex-shrink-0 ${
             isAccepted
-              ? "border border-tavern-border text-parchment-muted hover:border-red-700 hover:text-red-400"
-              : "bg-gold text-tavern hover:bg-gold-light"
+              ? "bg-paper-sunken text-ink-3 border-paper-divider hover:border-diff-deadly hover:text-diff-deadly"
+              : "bg-transparent text-accent border-accent hover:opacity-70"
           }`}
         >
           {loading ? "…" : isAccepted ? "Remove" : "Accept"}
         </button>
       </div>
 
-      <div className="flex items-center gap-2 flex-wrap">
+      <div className="flex items-center gap-[6px] flex-wrap">
         <FrequencyBadge frequency={template.frequency} />
         <DifficultyBadge difficulty={template.difficulty} />
-        <span className="text-gold text-xs font-medium ml-auto">
-          {template.xp_reward} XP
+        <span className="text-accent text-[10px] tracking-[.06em] ml-auto">
+          {template.xp_reward} xp
         </span>
       </div>
 
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      {error && <p className="text-diff-deadly text-[10px]">{error}</p>}
     </div>
   );
 }

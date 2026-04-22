@@ -25,34 +25,28 @@ export default function QuestBoard({ quests }: { quests: QuestWithNpc[] }) {
 
   return (
     <div>
-      <div className="flex items-center justify-between mb-6">
-        <h1 className="font-display text-2xl text-gold tracking-wide">
-          Quest Board
-        </h1>
-        <span className="text-parchment-muted text-sm">
-          {filtered.length} active quest{filtered.length !== 1 ? "s" : ""}
+      <div className="flex items-baseline justify-between mb-6">
+        <h1 className="text-ink-1 text-[16px] tracking-[.12em]">Quest Board</h1>
+        <span className="text-ink-3 text-[10px]">
+          {filtered.length} active
         </span>
       </div>
 
       {/* Filter tabs */}
-      <div className="flex gap-1 mb-6 border-b border-tavern-border pb-3">
+      <div className="flex gap-[2px] mb-6 border-b border-paper-divider pb-3">
         {filters.map((f) => {
-          const count =
-            f.value === "all"
-              ? quests.length
-              : quests.filter((q) => q.quest_type === f.value).length;
+          const active = activeFilter === f.value;
           return (
             <button
               key={f.value}
               onClick={() => setActiveFilter(f.value)}
-              className={`px-3 py-1.5 rounded text-sm transition-colors flex items-center gap-1.5 ${
-                activeFilter === f.value
-                  ? "bg-tavern-mid text-gold"
-                  : "text-parchment-muted hover:text-parchment hover:bg-tavern-mid"
+              className={`rounded-[2px] px-[14px] py-[5px] text-[10px] tracking-[.06em] transition-all border ${
+                active
+                  ? "bg-accent-soft text-accent border-accent"
+                  : "bg-transparent text-ink-3 border-transparent hover:text-ink-2"
               }`}
             >
               {f.label}
-              <span className="text-xs opacity-70">({count})</span>
             </button>
           );
         })}
@@ -60,17 +54,17 @@ export default function QuestBoard({ quests }: { quests: QuestWithNpc[] }) {
 
       {filtered.length === 0 ? (
         <div className="text-center py-20">
-          <p className="text-parchment-muted text-lg mb-2">No quests found</p>
-          <p className="text-parchment-muted text-sm">
+          <p className="text-ink-3 text-[11px] mb-2">No quests found</p>
+          <p className="text-ink-3 text-[10px]">
             Visit the{" "}
-            <a href="/hub/questify/village" className="text-gold hover:text-gold-light transition-colors">
+            <a href="/hub/questify/village" className="text-accent hover:opacity-70 transition-opacity">
               Village
             </a>{" "}
             to accept quests from NPCs.
           </p>
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-[14px]">
           {filtered.map((quest) => (
             <QuestCard key={quest.id} quest={quest} />
           ))}

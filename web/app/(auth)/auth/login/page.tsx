@@ -29,23 +29,22 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-tavern px-4">
+    <div className="min-h-screen flex items-center justify-center bg-paper px-4">
       <div className="w-full max-w-sm">
         <div className="text-center mb-8">
-          <h1 className="font-display text-4xl text-gold tracking-widest mb-2">
-            QUESTIFY
-          </h1>
-          <p className="text-parchment-muted text-sm">Your adventure awaits</p>
+          <div className="font-display text-[11px] text-ink-3 tracking-[.3em] uppercase mb-3">黒ラボ</div>
+          <div className="font-mono text-[24px] text-ink-1 tracking-[.2em] uppercase">KUROLABS</div>
+          <div className="mx-auto mt-4" style={{ width: 48, height: 1, background: "var(--paper-border)" }} />
         </div>
 
-        <div className="bg-tavern-light border border-tavern-border rounded-lg p-8">
-          <h2 className="font-display text-lg text-parchment mb-6 tracking-wide">
-            Enter the Tavern
+        <div className="bg-paper-raised border border-paper-border rounded-[4px] p-8">
+          <h2 className="text-ink-1 text-[14px] tracking-[.08em] mb-6">
+            Sign in
           </h2>
 
-          <form onSubmit={handleSubmit} className="space-y-4">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-4">
             <div>
-              <label className="block text-parchment-muted text-xs uppercase tracking-widest mb-1.5">
+              <label className="block text-ink-3 text-[10px] uppercase tracking-[.1em] mb-1.5">
                 Email
               </label>
               <input
@@ -53,13 +52,13 @@ export default function LoginPage() {
                 type="email"
                 required
                 autoComplete="email"
-                className="w-full bg-tavern border border-tavern-border text-parchment px-3 py-2.5 rounded focus:outline-none focus:border-gold placeholder-ink-muted text-sm"
-                placeholder="adventurer@realm.com"
+                className="w-full bg-paper-sunken border border-paper-border text-ink-1 px-3 py-2.5 rounded-[4px] focus:outline-none focus:border-accent placeholder:text-ink-4 text-[12px] tracking-[.02em] transition-colors"
+                placeholder="you@example.com"
               />
             </div>
 
             <div>
-              <label className="block text-parchment-muted text-xs uppercase tracking-widest mb-1.5">
+              <label className="block text-ink-3 text-[10px] uppercase tracking-[.1em] mb-1.5">
                 Password
               </label>
               <input
@@ -67,13 +66,13 @@ export default function LoginPage() {
                 type="password"
                 required
                 autoComplete="current-password"
-                className="w-full bg-tavern border border-tavern-border text-parchment px-3 py-2.5 rounded focus:outline-none focus:border-gold placeholder-ink-muted text-sm"
+                className="w-full bg-paper-sunken border border-paper-border text-ink-1 px-3 py-2.5 rounded-[4px] focus:outline-none focus:border-accent placeholder:text-ink-4 text-[12px] tracking-[.02em] transition-colors"
                 placeholder="••••••••"
               />
             </div>
 
             {error && (
-              <p className="text-red-400 text-sm border border-red-900 bg-red-950/30 rounded px-3 py-2">
+              <p className="text-[#b83c3c] text-[11px] border border-[#e0a8a8] bg-[#f9e4e4] rounded-[2px] px-3 py-2">
                 {error}
               </p>
             )}
@@ -81,17 +80,17 @@ export default function LoginPage() {
             <button
               type="submit"
               disabled={loading}
-              className="w-full bg-gold text-tavern font-semibold py-2.5 rounded hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed font-display tracking-wider text-sm mt-2"
+              className="w-full bg-accent text-white py-2.5 rounded-[2px] hover:opacity-80 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed font-mono tracking-[.08em] text-[11px] mt-2"
             >
-              {loading ? "Entering…" : "Begin Quest"}
+              {loading ? "Signing in…" : "Sign in"}
             </button>
           </form>
 
-          <p className="text-center text-parchment-muted text-sm mt-6">
+          <p className="text-center text-ink-3 text-[11px] mt-6">
             No account?{" "}
             <Link
               href="/auth/signup"
-              className="text-gold hover:text-gold-light transition-colors"
+              className="text-accent hover:opacity-70 transition-opacity"
             >
               Create one
             </Link>

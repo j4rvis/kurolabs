@@ -71,14 +71,14 @@ export default async function NpcDetailPage({
       {/* Back link */}
       <Link
         href="/hub/questify/village"
-        className="text-parchment-muted hover:text-parchment text-sm transition-colors mb-6 inline-flex items-center gap-1"
+        className="text-ink-3 hover:text-ink-2 text-[10px] tracking-[.06em] transition-colors mb-6 inline-flex items-center gap-1"
       >
         ← Village
       </Link>
 
       {/* NPC header */}
-      <div className="bg-tavern-light border border-tavern-border rounded-lg p-6 mb-6 flex gap-5 items-start">
-        <div className="relative w-24 h-24 rounded-full overflow-hidden border-2 border-tavern-border flex-shrink-0 bg-tavern-mid">
+      <div className="bg-paper-raised border border-paper-border rounded-[4px] mb-6 overflow-hidden flex gap-5 items-start">
+        <div className="relative w-[120px] h-[120px] flex-shrink-0 bg-paper-sunken overflow-hidden">
           <Image
             src={`/images/npc/${npc.image_filename}`}
             alt={npc.name}
@@ -87,21 +87,21 @@ export default async function NpcDetailPage({
             unoptimized
           />
         </div>
-        <div className="flex-1 min-w-0">
+        <div className="flex-1 min-w-0 p-5 pl-0">
           <div className="flex items-start justify-between gap-4">
             <div>
-              <h1 className="font-display text-xl text-parchment tracking-wide">
+              <h1 className="text-ink-1 text-[15px] tracking-[.06em]">
                 {npc.name}
               </h1>
-              <p className="text-gold text-sm mt-0.5">{npc.title}</p>
-              <p className="text-parchment-muted text-xs mt-0.5">
+              <p className="text-accent text-[10px] tracking-[.04em] mt-0.5">{npc.title}</p>
+              <p className="text-ink-3 text-[10px] mt-0.5 tracking-[.04em]">
                 {npc.category}
               </p>
             </div>
             <ConnectButton npcId={npc.id} isConnected={isConnected} />
           </div>
           {npc.description && (
-            <p className="text-parchment-muted text-sm mt-3 leading-relaxed">
+            <p className="text-ink-3 text-[11px] mt-3 leading-relaxed">
               {npc.description}
             </p>
           )}
@@ -110,7 +110,7 @@ export default async function NpcDetailPage({
 
       {/* Quest templates */}
       <div>
-        <h2 className="font-display text-sm text-parchment-muted tracking-widest uppercase mb-4">
+        <h2 className="text-ink-3 text-[9px] tracking-[.1em] uppercase mb-4">
           Available Quests
         </h2>
         <div className="flex flex-col gap-3">

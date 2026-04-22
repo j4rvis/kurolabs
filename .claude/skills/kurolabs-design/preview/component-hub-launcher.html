@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:16px; }
+.grid { display:grid; grid-template-columns:repeat(3,1fr); gap:12px; }
+.card { background:#faf8f3; border:1px solid #d0c4b0; border-radius:4px; padding:20px; position:relative; overflow:hidden; }
+.kanji { position:absolute; top:-6px; right:8px; font-family:'Cinzel',serif; font-size:64px; opacity:.08; line-height:1; pointer-events:none; }
+.romaji { font-size:9px; color:#9c8c78; letter-spacing:.14em; margin-bottom:6px; }
+.name { font-size:14px; letter-spacing:.08em; margin-bottom:6px; }
+.desc { font-size:10px; color:#5c4f3d; line-height:1.6; }
+.header { text-align:center; margin-bottom:20px; }
+</style></head>
+<body>
+<div class="header">
+  <div style="font-family:'Cinzel',serif;font-size:9px;color:#9c8c78;letter-spacing:.3em;margin-bottom:8px">黒ラボ</div>
+  <div style="font-size:20px;color:#1c1612;letter-spacing:.22em">KUROLABS</div>
+  <div style="width:36px;height:1px;background:#d0c4b0;margin:12px auto 0"></div>
+</div>
+<div class="grid">
+  <div class="card">
+    <div class="kanji" style="color:#b83c3c">冒</div>
+    <div class="romaji">bōken</div>
+    <div class="name" style="color:#b83c3c">Questify</div>
+    <div class="desc">Turn daily habits into epic quests</div>
+  </div>
+  <div class="card">
+    <div class="kanji" style="color:#3d5a9e">想</div>
+    <div class="romaji">omoi</div>
+    <div class="name" style="color:#3d5a9e">Omoi</div>
+    <div class="desc">Capture thoughts, ideas, insights</div>
+  </div>
+  <div class="card">
+    <div class="kanji" style="color:#b07030">人</div>
+    <div class="romaji">hito</div>
+    <div class="name" style="color:#b07030">Profile</div>
+    <div class="desc">Manage your account and character</div>
+  </div>
+</div>
+</body></html>

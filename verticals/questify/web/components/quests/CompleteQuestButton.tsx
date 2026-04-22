@@ -29,9 +29,7 @@ export default function CompleteQuestButton({ questId }: { questId: string }) {
 
   if (done) {
     return (
-      <span className="text-xs text-[#52be80] font-medium px-3 py-1.5">
-        ✓ Completed!
-      </span>
+      <span className="text-[11px] text-accent flex-shrink-0">✓</span>
     );
   }
 
@@ -40,11 +38,11 @@ export default function CompleteQuestButton({ questId }: { questId: string }) {
       <button
         onClick={handleComplete}
         disabled={loading}
-        className="text-xs bg-gold text-tavern font-semibold px-3 py-1.5 rounded hover:bg-gold-light transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+        className="flex-shrink-0 border border-paper-border text-ink-3 rounded-[2px] px-[10px] py-[4px] text-[10px] tracking-[.04em] transition-colors hover:border-accent hover:text-accent disabled:opacity-50 disabled:cursor-not-allowed"
       >
-        {loading ? "…" : "Complete"}
+        {loading ? "…" : "complete"}
       </button>
-      {error && <span className="text-xs text-red-400">{error}</span>}
+      {error && <span className="text-[10px] text-diff-deadly">{error}</span>}
     </div>
   );
 }

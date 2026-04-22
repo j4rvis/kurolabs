@@ -1,0 +1,56 @@
+/* ============================================================
+   Omoi theme — indigo primary + thought domain tokens
+   Layer 2: sets primary, then adds Omoi-specific tokens.
+   The base theme (kurolabs.css) knows nothing about thoughts.
+
+   Usage:
+     @import "tailwindcss";
+     @import "../../shared/theme/omoi.css";
+   ============================================================ */
+@import "./kurolabs.css";
+
+:root {
+  /* ── Primary ── */
+  --color-primary:      #3d5a9e;
+  --color-primary-soft: #dce4f5;
+
+  /* ── Omoi domain tokens ──────────────────────────────────
+     These ONLY live here. kurolabs.css has no knowledge of
+     thoughts, categories, tags, or knowledge base concepts.
+     ────────────────────────────────────────────────────── */
+
+  /* Thought category colors */
+  --color-cat-philosophy:        #5840a0;
+  --color-cat-philosophy-soft:   #ede8f5;
+  --color-cat-philosophy-border: #c8b8e8;
+
+  --color-cat-reading:           #3d7a52;
+  --color-cat-reading-soft:      #eaf4ee;
+  --color-cat-reading-border:    #b8d9c4;
+
+  --color-cat-ideas:             #2d5a8e;
+  --color-cat-ideas-soft:        #e8f0f9;
+  --color-cat-ideas-border:      #b0c8e8;
+
+  --color-cat-writing:           #b85a20;
+  --color-cat-writing-soft:      #f9ece4;
+  --color-cat-writing-border:    #e0b898;
+
+  --color-cat-general:           #8c7a68;
+  --color-cat-general-soft:      #f0ede8;
+  --color-cat-general-border:    #d0c4b0;
+}
+
+/* ── Omoi Tailwind extensions ─────────────────────────── */
+@theme inline {
+  --color-cat-philosophy:        var(--color-cat-philosophy);
+  --color-cat-philosophy-soft:   var(--color-cat-philosophy-soft);
+  --color-cat-reading:           var(--color-cat-reading);
+  --color-cat-reading-soft:      var(--color-cat-reading-soft);
+  --color-cat-ideas:             var(--color-cat-ideas);
+  --color-cat-ideas-soft:        var(--color-cat-ideas-soft);
+  --color-cat-writing:           var(--color-cat-writing);
+  --color-cat-writing-soft:      var(--color-cat-writing-soft);
+  --color-cat-general:           var(--color-cat-general);
+  --color-cat-general-soft:      var(--color-cat-general-soft);
+}

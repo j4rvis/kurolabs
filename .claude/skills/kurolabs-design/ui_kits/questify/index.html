@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Questify</title>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&display=swap" rel="stylesheet">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body {
+  font-family:'Syne Mono',monospace;
+  background-color:#f5f0e8;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color:#1c1612;
+  min-height:100vh;
+}
+button{font-family:'Syne Mono',monospace;cursor:pointer;}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel">
+const { useState } = React;
+
+// ── Tokens ──
+const T = {
+  paper: '#f5f0e8',
+  raised: '#faf8f3',
+  sunken: '#ede7da',
+  border: '#d0c4b0',
+  divider: '#e2dbd0',
+  ink1: '#1c1612',
+  ink2: '#5c4f3d',
+  ink3: '#9c8c78',
+  ink4: '#c4b8a6',
+  accent: '#b83c3c',
+  accentSoft: '#f5e0e0',
+};
+
+const DIFF = {
+  trivial:   { bg:'#f0f1f2', color:'#8a9099', border:'#d0d4d8', label:'Trivial',   xp:25 },
+  easy:      { bg:'#eaf4ee', color:'#3d7a52', border:'#b8d9c4', label:'Easy',      xp:50 },
+  medium:    { bg:'#f9f0e4', color:'#b07030', border:'#e0c89a', label:'Medium',    xp:100 },
+  hard:      { bg:'#f9ece4', color:'#b85a20', border:'#e0b898', label:'Hard',      xp:250 },
+  deadly:    { bg:'#f9e4e4', color:'#b83c3c', border:'#e0a8a8', label:'Deadly',    xp:500 },
+  legendary: { bg:'#f0eaf9', color:'#7040a0', border:'#c8aee0', label:'Legendary', xp:1000 },
+};
+const QTYPE = {
+  daily: { bg:'#e8f0f9', color:'#2d5a8e', border:'#b0c8e8', label:'Daily' },
+  side:  { bg:'#eaf4ee', color:'#3d7a52', border:'#b8d9c4', label:'Side Quest' },
+  epic:  { bg:'#f0eaf9', color:'#7040a0', border:'#c8aee0', label:'Epic' },
+};
+
+const QUESTS = [
+  { id:1, title:'Morning Run — 30 min', npc:'Bronn Ironveil', type:'daily', diff:'easy', streak:7, desc:'Push your limits with an early run.' },
+  { id:2, title:'Meditate for 10 minutes', npc:'Brother Ashveil', type:'daily', diff:'trivial', streak:3, desc:'Clear your mind. Breathe.' },
+  { id:3, title:'Read 20 pages', npc:'Elspeth Inkwell', type:'daily', diff:'easy', streak:0, desc:'Knowledge is the sharpest sword.' },
+  { id:4, title:'Write 500 words', npc:'Finn Quillmark', type:'side', diff:'medium', streak:0, desc:'Put quill to parchment. The story awaits.' },
+  { id:5, title:'Full workout session', npc:'Bronn Ironveil', type:'side', diff:'hard', streak:0, desc:'Train hard. Rest harder. Repeat.' },
+  { id:6, title:'Launch a side project', npc:null, type:'epic', diff:'legendary', streak:0, desc:'Transform your idea into reality.' },
+];
+
+const NPCS = [
+  { name:'Bronn Ironveil', cat:'Fitness',     img:'../../assets/npc/Fitness_Bronn Ironveil.png', connected:true },
+  { name:'Brother Ashveil', cat:'Mindfulness', img:'../../assets/npc/Mindfulness_Brother Ashveil.png', connected:true },
+  { name:'Elspeth Inkwell', cat:'Reading',     img:'../../assets/npc/Reading_Elspeth Inkwell.png', connected:false },
+  { name:'Finn Quillmark',  cat:'Writing',     img:'../../assets/npc/Writing_Finn Quillmark.png', connected:false },
+  { name:'Pip Quickpocket', cat:'Errands',     img:'../../assets/npc/Errands_Pip-Quickpocket.png', connected:false },
+];
+
+// ── Shared ──
+function Badge({ s, children }) {
+  return <span style={{ display:'inline-flex', alignItems:'center', padding:'2px 7px', borderRadius:2, fontSize:10, letterSpacing:'.04em', border:`1px solid ${s.border}`, background:s.bg, color:s.color }}>{children}</span>;
+}
+
+function NavBar({ tab, onTab }) {
+  const tabs = [['board','Quest Board'],['village','Village'],['character','Character']];
+  return (
+    <nav style={{ background:T.raised, borderBottom:`1px solid ${T.border}`, padding:'0 32px', display:'flex', alignItems:'center', gap:0 }}>
+      <div style={{ marginRight:32, padding:'16px 0' }}>
+        <div style={{ fontFamily:"'Cinzel',serif", fontSize:9, color:T.ink3, letterSpacing:'.25em', marginBottom:2 }}>冒険</div>
+        <div style={{ fontSize:14, color:T.ink1, letterSpacing:'.15em' }}>QUESTIFY</div>
+      </div>
+      {tabs.map(([id,label]) => (
+        <button key={id} onClick={() => onTab(id)} style={{
+          background:'transparent', border:'none', padding:'18px 16px',
+          fontSize:11, letterSpacing:'.06em', cursor:'pointer',
+          color: tab===id ? T.accent : T.ink3,
+          borderBottom: tab===id ? `2px solid ${T.accent}` : '2px solid transparent',
+          transition:'color .15s',
+        }}>{label}</button>
+      ))}
+    </nav>
+  );
+}
+
+// ── Quest Board ──
+function QuestCard({ q }) {
+  const [done, setDone] = useState(false);
+  const d = DIFF[q.diff], ty = QTYPE[q.type];
+  return (
+    <div style={{ background:T.raised, border:`1px solid ${done ? T.divider : T.border}`, borderRadius:4, padding:20, display:'flex', flexDirection:'column', gap:12, opacity:done?.55:1, transition:'opacity .3s' }}>
+      <div style={{ display:'flex', justifyContent:'space-between', gap:12, alignItems:'flex-start' }}>
+        <div>
+          <div style={{ fontSize:12, color:done?T.ink3:T.ink1, letterSpacing:'.03em', lineHeight:1.4, textDecoration:done?'line-through':'none' }}>{q.title}</div>
+          {q.npc && <div style={{ fontSize:10, color:T.ink3, marginTop:3, letterSpacing:'.04em' }}>{q.npc}</div>}
+        </div>
+        {q.type==='daily' && !done && (
+          <button onClick={()=>setDone(true)} style={{ flexShrink:0, border:`1px solid ${T.border}`, background:'transparent', color:T.ink3, borderRadius:2, padding:'4px 10px', fontSize:10, letterSpacing:'.04em', transition:'border-color .15s, color .15s' }}
+            onMouseEnter={e=>{e.currentTarget.style.borderColor=T.accent;e.currentTarget.style.color=T.accent;}}
+            onMouseLeave={e=>{e.currentTarget.style.borderColor=T.border;e.currentTarget.style.color=T.ink3;}}>
+            complete
+          </button>
+        )}
+        {done && <span style={{ fontSize:11, color:T.accent }}>✓</span>}
+      </div>
+      {q.desc && <div style={{ fontSize:10, color:T.ink3, lineHeight:1.6 }}>{q.desc}</div>}
+      <div style={{ display:'flex', alignItems:'center', gap:6, flexWrap:'wrap', borderTop:`1px solid ${T.divider}`, paddingTop:10 }}>
+        <Badge s={ty}>{ty.label}</Badge>
+        <Badge s={d}>{d.label}</Badge>
+        <span style={{ marginLeft:'auto', fontSize:10, color:T.accent, letterSpacing:'.06em' }}>{d.xp} xp</span>
+      </div>
+      {q.streak>0 && <div style={{ fontSize:10, color:T.ink3 }}>↑ {q.streak} day streak</div>}
+    </div>
+  );
+}
+
+function QuestBoard() {
+  const [filter, setFilter] = useState('all');
+  const filters = [['all','All'],['daily','Daily'],['side','Side'],['epic','Epic']];
+  const visible = filter==='all' ? QUESTS : QUESTS.filter(q=>q.type===filter);
+  return (
+    <div style={{ padding:'32px', maxWidth:960, margin:'0 auto' }}>
+      <div style={{ display:'flex', alignItems:'baseline', justifyContent:'space-between', marginBottom:24 }}>
+        <h1 style={{ fontSize:16, color:T.ink1, letterSpacing:'.12em' }}>Quest Board</h1>
+        <span style={{ fontSize:10, color:T.ink3 }}>{visible.length} active</span>
+      </div>
+      <div style={{ display:'flex', gap:2, marginBottom:24, borderBottom:`1px solid ${T.divider}`, paddingBottom:12 }}>
+        {filters.map(([v,l]) => (
+          <button key={v} onClick={()=>setFilter(v)} style={{
+            background:filter===v?T.accentSoft:'transparent', border:`1px solid ${filter===v?T.accent:'transparent'}`,
+            borderRadius:2, padding:'5px 14px', fontSize:10, letterSpacing:'.06em',
+            color:filter===v?T.accent:T.ink3, cursor:'pointer', transition:'all .15s',
+          }}>{l}</button>
+        ))}
+      </div>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(270px,1fr))', gap:14 }}>
+        {visible.map(q=><QuestCard key={q.id} q={q}/>)}
+      </div>
+    </div>
+  );
+}
+
+// ── Village ──
+function Village() {
+  const [conn, setConn] = useState(NPCS.map(n=>n.connected));
+  return (
+    <div style={{ padding:'32px', maxWidth:960, margin:'0 auto' }}>
+      <h1 style={{ fontSize:16, color:T.ink1, letterSpacing:'.12em', marginBottom:8 }}>The Village</h1>
+      <p style={{ fontSize:11, color:T.ink3, marginBottom:28, letterSpacing:'.03em' }}>Connect with guides to receive quests in their domain.</p>
+      <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fill,minmax(170px,1fr))', gap:14 }}>
+        {NPCS.map((npc,i) => (
+          <div key={npc.name} style={{ background:T.raised, border:`1px solid ${conn[i]?T.accent:T.border}`, borderRadius:4, overflow:'hidden', transition:'border-color .2s' }}>
+            <div style={{ height:200, background:T.sunken, overflow:'hidden' }}>
+              <img src={npc.img} alt={npc.name} style={{ width:'100%', height:'100%', objectFit:'cover', objectPosition:'top center' }} onError={e=>{e.target.style.display='none';}} />
+            </div>
+            <div style={{ padding:14 }}>
+              <div style={{ fontSize:11, color:T.ink1, letterSpacing:'.04em', marginBottom:2 }}>{npc.name}</div>
+              <div style={{ fontSize:10, color:T.ink3, marginBottom:12, letterSpacing:'.06em' }}>{npc.cat}</div>
+              <button onClick={()=>setConn(p=>{const n=[...p];n[i]=!n[i];return n;})}
+                style={{ width:'100%', padding:'6px 0', border:`1px solid ${conn[i]?T.divider:T.accent}`, borderRadius:2, background:conn[i]?T.sunken:'transparent', color:conn[i]?T.ink3:T.accent, fontSize:10, letterSpacing:'.06em', cursor:'pointer', transition:'all .15s' }}>
+                {conn[i]?'connected ✓':'connect'}
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+// ── Character ──
+function Character() {
+  const attrs = [['STR','18'],['DEX','14'],['CON','16'],['INT','12'],['WIS','15'],['CHA','10']];
+  return (
+    <div style={{ padding:'32px', maxWidth:600, margin:'0 auto' }}>
+      <h1 style={{ fontSize:16, color:T.ink1, letterSpacing:'.12em', marginBottom:24 }}>Character Sheet</h1>
+      <div style={{ background:T.raised, border:`1px solid ${T.border}`, borderRadius:4, padding:28 }}>
+        <div style={{ display:'flex', alignItems:'center', gap:20, marginBottom:24, paddingBottom:20, borderBottom:`1px solid ${T.divider}` }}>
+          <div style={{ width:56, height:56, borderRadius:2, background:T.sunken, border:`1px solid ${T.border}`, display:'flex', alignItems:'center', justifyContent:'center', fontFamily:"'Cinzel',serif", fontSize:22, color:T.accent }}>冒</div>
+          <div>
+            <div style={{ fontSize:15, color:T.ink1, letterSpacing:'.08em' }}>Adventurer</div>
+            <div style={{ fontSize:10, color:T.ink3, marginTop:4, letterSpacing:'.04em' }}>Level 7 · 1,820 / 2,100 xp</div>
+          </div>
+        </div>
+        {/* XP bar */}
+        <div style={{ background:T.sunken, borderRadius:1, height:4, marginBottom:24, overflow:'hidden', border:`1px solid ${T.divider}` }}>
+          <div style={{ height:'100%', width:'87%', background:T.accent, borderRadius:1 }} />
+        </div>
+        <div style={{ display:'grid', gridTemplateColumns:'repeat(3,1fr)', gap:10 }}>
+          {attrs.map(([abbr,val]) => (
+            <div key={abbr} style={{ background:T.paper, border:`1px solid ${T.divider}`, borderRadius:2, padding:'12px 0', textAlign:'center' }}>
+              <div style={{ fontSize:18, color:T.ink1, letterSpacing:'.02em' }}>{val}</div>
+              <div style={{ fontSize:9, color:T.accent, letterSpacing:'.12em', marginTop:4 }}>{abbr}</div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [tab, setTab] = useState('board');
+  return (
+    <div>
+      <NavBar tab={tab} onTab={setTab} />
+      {tab==='board' && <QuestBoard />}
+      {tab==='village' && <Village />}
+      {tab==='character' && <Character />}
+    </div>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

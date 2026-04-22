@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
 import type { Thought, ThoughtStats } from "../../lib/types";
 import { ThoughtList } from "./ThoughtList";
@@ -21,6 +21,8 @@ export function OmoiDashboard({ initialThoughts, initialTotal, initialStats }: O
   const [submitting, setSubmitting] = useState(false);
   const [tagFilter, setTagFilter] = useState<string | null>(null);
   const LIMIT = 20;
+
+  const allTags = [...new Set(thoughts.flatMap((t) => t.tags))];
 
   const loadPage = useCallback(async (p: number, tag?: string | null) => {
     const params = new URLSearchParams({ page: String(p), limit: String(LIMIT) });
@@ -47,29 +49,44 @@ export function OmoiDashboard({ initialThoughts, initialTotal, initialStats }: O
     if (!res?.ok) return;
     setContent("");
     loadPage(1, tagFilter);
-    // Refresh stats
     const sr = await fetch("/api/thoughts/stats").catch(() => null);
     if (sr?.ok) setStats(await sr.json());
   }
 
+  const toggleTag = (tag: string) => {
+    const next = tagFilter === tag ? null : tag;
+    setTagFilter(next);
+    loadPage(1, next);
+  };
+
   return (
-    <div className="flex flex-col gap-6">
-      {/* Stats bar */}
-      <div className="grid grid-cols-3 gap-3">
-        {[
-          { label: "Total", value: stats.total },
-          { label: "Today", value: stats.today },
-          { label: "Connections", value: stats.connections },
-        ].map(({ label, value }) => (
-          <div key={label} className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 text-center">
-            <div className="text-2xl font-bold text-violet-400">{value}</div>
-            <div className="text-xs text-zinc-500 mt-1">{label}</div>
-          </div>
-        ))}
+    <div className="max-w-[760px] mx-auto px-6 py-8 flex flex-col gap-5">
+
+      {/* Header */}
+      <div className="flex items-end justify-between pb-5 mb-2 border-b border-paper-divider">
+        <div>
+          <div className="font-display text-[28px] text-omoi leading-none mb-1 opacity-25">想</div>
+          <div className="text-ink-1 text-[18px] tracking-[.1em]">OMOI</div>
+          <div className="text-ink-3 text-[10px] mt-1 tracking-[.06em]">inner knowledge base</div>
+        </div>
+
+        {/* Stats grid */}
+        <div className="grid grid-cols-3 border border-paper-divider rounded-[2px] overflow-hidden divide-x divide-paper-divider">
+          {[
+            { label: "total",       value: stats.total },
+            { label: "today",       value: stats.today },
+            { label: "connections", value: stats.connections },
+          ].map(({ label, value }) => (
+            <div key={label} className="bg-paper-raised px-4 py-[10px] text-center">
+              <div className="text-omoi text-[16px] tracking-[.02em]">{value}</div>
+              <div className="text-ink-3 text-[9px] mt-[2px] tracking-[.08em]">{label}</div>
+            </div>
+          ))}
+        </div>
       </div>
 
-      {/* Quick capture */}
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 flex flex-col gap-3">
+      {/* Capture */}
+      <div>
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -77,43 +94,47 @@ export function OmoiDashboard({ initialThoughts, initialTotal, initialStats }: O
             if (e.key === "Enter" && (e.metaKey || e.ctrlKey)) handleCapture();
           }}
           placeholder="What's on your mind? (⌘↵ to save)"
-          className="w-full h-24 bg-zinc-800 border border-zinc-700 rounded p-3 text-zinc-200 text-sm resize-none focus:outline-none focus:border-violet-500 placeholder:text-zinc-600"
+          className={`w-full h-[72px] bg-paper-raised border rounded-[4px] px-[14px] py-3 text-ink-1 text-[12px] tracking-[.02em] leading-[1.6] resize-none outline-none placeholder:text-ink-4 transition-colors caret-omoi ${
+            content ? "border-omoi" : "border-paper-border"
+          }`}
         />
-        <button
-          onClick={handleCapture}
-          disabled={submitting || !content.trim()}
-          className="self-end px-4 py-2 bg-violet-600 hover:bg-violet-700 disabled:opacity-40 rounded text-sm text-white font-medium"
-        >
-          {submitting ? "Capturing…" : "Capture thought"}
-        </button>
+        <div className="flex justify-end mt-2">
+          <button
+            onClick={handleCapture}
+            disabled={submitting || !content.trim()}
+            className={`border rounded-[2px] px-[18px] py-[7px] text-[10px] tracking-[.08em] transition-all ${
+              content.trim() && !submitting
+                ? "bg-omoi text-white border-omoi cursor-pointer"
+                : "bg-paper-sunken text-ink-4 border-paper-divider cursor-default"
+            }`}
+          >
+            {submitting ? "capturing…" : "capture"}
+          </button>
+        </div>
       </div>
 
-      {/* Top tags */}
-      {stats.top_tags.length > 0 && (
-        <div className="flex flex-wrap gap-2">
-          {stats.top_tags.map(({ tag, count }) => (
+      {/* Tag filter */}
+      {allTags.length > 0 && (
+        <div className="flex flex-wrap gap-[6px]">
+          {allTags.slice(0, 10).map((tag) => (
             <button
               key={tag}
-              onClick={() => {
-                const next = tagFilter === tag ? null : tag;
-                setTagFilter(next);
-                loadPage(1, next);
-              }}
-              className={`px-2 py-1 rounded text-xs font-mono transition-colors ${
+              onClick={() => toggleTag(tag)}
+              className={`text-[10px] tracking-[.04em] border rounded-[2px] px-[7px] py-[2px] cursor-pointer transition-all ${
                 tagFilter === tag
-                  ? "bg-violet-600 text-white"
-                  : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700"
+                  ? "bg-omoi-soft text-omoi border-omoi"
+                  : "bg-paper-sunken text-ink-3 border-paper-divider"
               }`}
             >
-              #{tag} <span className="opacity-60">{count}</span>
+              #{tag}
             </button>
           ))}
           {tagFilter && (
             <button
               onClick={() => { setTagFilter(null); loadPage(1, null); }}
-              className="text-xs text-zinc-600 hover:text-zinc-400 self-center"
+              className="text-[10px] tracking-[.04em] text-ink-4 hover:text-ink-3 bg-transparent border-none cursor-pointer"
             >
-              clear filter
+              clear ×
             </button>
           )}
         </div>

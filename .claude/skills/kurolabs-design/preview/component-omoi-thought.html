@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><meta charset="UTF-8">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:16px; }
+.capture { background:#faf8f3; border:1px solid #d0c4b0; border-radius:4px; padding:16px; display:flex; flex-direction:column; gap:10px; margin-bottom:10px; }
+textarea { background:#faf8f3; border:1px solid #d0c4b0; border-radius:2px; padding:10px 12px; font-size:11px; font-family:'Syne Mono',monospace; resize:none; width:100%; height:56px; outline:none; color:#1c1612; }
+textarea::placeholder { color:#c4b8a6; }
+.btn { align-self:flex-end; background:#3d5a9e; color:#fff; border:none; border-radius:2px; padding:6px 16px; font-size:10px; font-family:'Syne Mono',monospace; letter-spacing:.06em; cursor:pointer; }
+.thought { background:#faf8f3; border:1px solid #e2dbd0; border-radius:4px; padding:16px; margin-bottom:8px; }
+.thought p { font-size:11px; color:#5c4f3d; line-height:1.7; letter-spacing:.02em; display:-webkit-box; -webkit-line-clamp:3; -webkit-box-orient:vertical; overflow:hidden; }
+.meta { display:flex; align-items:center; gap:6px; margin-top:10px; flex-wrap:wrap; }
+.cat { display:inline-flex; align-items:center; padding:2px 7px; border-radius:2px; font-size:10px; border:1px solid; }
+.tag { font-size:10px; color:#9c8c78; background:#ede7da; border:1px solid #e2dbd0; padding:2px 7px; border-radius:2px; }
+.time { font-size:10px; color:#c4b8a6; margin-left:auto; }
+</style></head>
+<body>
+<div class="capture">
+  <textarea placeholder="What's on your mind? (⌘↵ to save)"></textarea>
+  <button class="btn">capture</button>
+</div>
+<div class="thought">
+  <p>The Japanese concept of ma (間) — negative space, the pause between notes — feels relevant to how I want to design. Emptiness as intentional structure, not absence.</p>
+  <div class="meta">
+    <span class="cat" style="background:#ede8f5;color:#5840a0;border-color:#c8b8e8">Philosophy</span>
+    <span class="tag">#design</span><span class="tag">#japan</span>
+    <span class="time">2h ago</span>
+  </div>
+</div>
+<div class="thought">
+  <p>Finished reading Piranesi. The house is an allegory for memory — each hall a different era, the statues like neurons.</p>
+  <div class="meta">
+    <span class="cat" style="background:#eaf4ee;color:#3d7a52;border-color:#b8d9c4">Reading</span>
+    <span class="tag">#books</span><span class="tag">#memory</span>
+    <span class="time">1d ago</span>
+  </div>
+</div>
+</body></html>

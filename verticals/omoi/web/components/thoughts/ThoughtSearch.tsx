@@ -37,7 +37,6 @@ export function ThoughtSearch({ onResultClick }: ThoughtSearchProps) {
     setResults(data.thoughts ?? []);
   }, [q, activeTag, category]);
 
-  // Debounce text search
   useEffect(() => {
     const timer = setTimeout(search, 300);
     return () => clearTimeout(timer);
@@ -51,14 +50,16 @@ export function ThoughtSearch({ onResultClick }: ThoughtSearchProps) {
           value={q}
           onChange={(e) => setQ(e.target.value)}
           placeholder="Search thoughts…"
-          className="flex-1 bg-zinc-900 border border-zinc-700 rounded-lg px-4 py-2 text-sm text-zinc-200 placeholder:text-zinc-600 focus:outline-none focus:border-violet-500"
+          className={`flex-1 bg-paper-raised border rounded-[4px] px-4 py-2 text-ink-1 text-[12px] tracking-[.02em] outline-none placeholder:text-ink-4 transition-colors ${
+            q ? "border-omoi" : "border-paper-border"
+          }`}
         />
         <select
           value={category}
           onChange={(e) => setCategory(e.target.value as ThoughtCategory | "")}
-          className="bg-zinc-900 border border-zinc-700 rounded-lg px-3 py-2 text-sm text-zinc-300 focus:outline-none focus:border-violet-500"
+          className="bg-paper-raised border border-paper-border rounded-[4px] px-3 py-2 text-ink-2 text-[11px] tracking-[.04em] outline-none focus:border-omoi"
         >
-          <option value="">All categories</option>
+          <option value="">all categories</option>
           {CATEGORIES.map((c) => (
             <option key={c} value={c}>{c}</option>
           ))}
@@ -66,25 +67,30 @@ export function ThoughtSearch({ onResultClick }: ThoughtSearchProps) {
       </div>
 
       {activeTag && (
-        <div className="flex items-center gap-2 text-sm text-zinc-400">
-          Filtering by tag:
+        <div className="flex items-center gap-2">
+          <span className="text-ink-3 text-[10px]">filtering by tag:</span>
           <TagChip tag={activeTag} active onClick={() => setActiveTag(null)} />
-          <button onClick={() => setActiveTag(null)} className="text-xs text-zinc-600 hover:text-zinc-400">
-            clear
+          <button
+            onClick={() => setActiveTag(null)}
+            className="text-ink-4 text-[10px] hover:text-ink-3"
+          >
+            clear ×
           </button>
         </div>
       )}
 
-      {loading && <p className="text-zinc-500 text-sm">Searching…</p>}
+      {loading && <p className="text-ink-3 text-[11px]">searching…</p>}
 
       <div className="flex flex-col gap-2">
         {results.map((t) => (
           <div
             key={t.id}
             onClick={() => onResultClick(t.id)}
-            className="bg-zinc-900 border border-zinc-800 rounded-lg p-4 cursor-pointer hover:border-zinc-700 transition-colors"
+            className="bg-paper-raised border border-paper-divider hover:border-paper-border rounded-[4px] p-4 cursor-pointer transition-colors"
           >
-            <p className="text-zinc-200 text-sm leading-relaxed line-clamp-2">{t.content}</p>
+            <p className="text-ink-2 text-[12px] leading-[1.7] tracking-[.02em] line-clamp-2">
+              {t.content}
+            </p>
             <div className="flex items-center gap-2 mt-2 flex-wrap">
               <CategoryBadge category={t.category} />
               {t.tags.slice(0, 3).map((tag) => (
@@ -94,7 +100,7 @@ export function ThoughtSearch({ onResultClick }: ThoughtSearchProps) {
           </div>
         ))}
         {results.length === 0 && (q || activeTag || category) && !loading && (
-          <p className="text-zinc-500 text-sm text-center py-6">No results.</p>
+          <p className="text-ink-3 text-[11px] text-center py-6">No results.</p>
         )}
       </div>
     </div>

@@ -15,11 +15,11 @@ export default async function UserManagementLayout({
   if (!user) redirect("/auth/login");
 
   return (
-    <div className="min-h-screen bg-tavern flex flex-col">
-      <nav className="bg-tavern-light border-b border-tavern-border px-4 sm:px-6 py-3 flex items-center">
+    <div className="min-h-screen bg-paper flex flex-col">
+      <nav className="bg-paper-raised border-b border-paper-border px-8 py-4 flex items-center">
         <Link
           href="/hub"
-          className="font-display text-xl text-gold tracking-widest"
+          className="font-display text-[14px] text-ink-1 tracking-[.2em]"
         >
           KUROLABS
         </Link>

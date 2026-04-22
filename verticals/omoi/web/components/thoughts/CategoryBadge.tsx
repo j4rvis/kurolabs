@@ -2,28 +2,19 @@
 
 import type { ThoughtCategory } from "../../lib/types";
 
-const CATEGORY_STYLES: Record<ThoughtCategory, string> = {
-  question: "bg-blue-900/40 text-blue-300 border-blue-700/50",
-  reminder: "bg-amber-900/40 text-amber-300 border-amber-700/50",
-  insight: "bg-emerald-900/40 text-emerald-300 border-emerald-700/50",
-  idea: "bg-purple-900/40 text-purple-300 border-purple-700/50",
-  other: "bg-zinc-800/40 text-zinc-400 border-zinc-700/50",
-};
-
-const CATEGORY_ICONS: Record<ThoughtCategory, string> = {
-  question: "?",
-  reminder: "⏰",
-  insight: "✦",
-  idea: "💡",
-  other: "·",
+const CATEGORY_CLASSES: Record<ThoughtCategory, string> = {
+  question: "bg-cat-question-bg text-cat-question-text border-cat-question-border",
+  reminder: "bg-cat-reminder-bg text-cat-reminder-text border-cat-reminder-border",
+  insight:  "bg-cat-insight-bg  text-cat-insight-text  border-cat-insight-border",
+  idea:     "bg-cat-idea-bg     text-cat-idea-text     border-cat-idea-border",
+  other:    "bg-cat-other-bg    text-cat-other-text    border-cat-other-border",
 };
 
 export function CategoryBadge({ category }: { category: ThoughtCategory }) {
   return (
     <span
-      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-xs border ${CATEGORY_STYLES[category]}`}
+      className={`inline-flex items-center px-[7px] py-[2px] rounded-[2px] text-[10px] tracking-[.04em] border ${CATEGORY_CLASSES[category] ?? CATEGORY_CLASSES.other}`}
     >
-      <span>{CATEGORY_ICONS[category]}</span>
       {category}
     </span>
   );

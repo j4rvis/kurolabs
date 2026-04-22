@@ -10,19 +10,17 @@ export default async function DashboardNav() {
   } = await supabase.auth.getUser();
 
   return (
-    <nav className="bg-tavern-light border-b border-tavern-border px-4 sm:px-6 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-1">
-        <Link
-          href="/hub/questify/quests"
-          className="font-display text-xl text-gold tracking-widest mr-4 sm:mr-8"
-        >
-          QUESTIFY
+    <nav className="bg-paper-raised border-b border-paper-border px-8 flex items-center gap-0">
+      <div className="mr-8 py-4">
+        <Link href="/hub/questify/quests">
+          <div className="font-display text-[9px] text-ink-3 tracking-[.25em] mb-0.5">冒険</div>
+          <div className="font-mono text-[14px] text-ink-1 tracking-[.15em]">QUESTIFY</div>
         </Link>
-        <NavLinks />
       </div>
-      <div className="flex items-center gap-3">
+      <NavLinks />
+      <div className="ml-auto flex items-center gap-3 py-4">
         {user?.email && (
-          <span className="text-parchment-muted text-xs hidden sm:block truncate max-w-[160px]">
+          <span className="text-ink-3 text-[10px] hidden sm:block truncate max-w-[160px] tracking-[.04em]">
             {user.email}
           </span>
         )}

@@ -34,15 +34,15 @@ export default function ConnectButton({
       <button
         onClick={handleToggle}
         disabled={loading}
-        className={`text-sm font-semibold px-4 py-2 rounded transition-colors disabled:opacity-50 disabled:cursor-not-allowed ${
+        className={`text-[10px] tracking-[.06em] px-[18px] py-[7px] rounded-[2px] border transition-all disabled:opacity-50 disabled:cursor-not-allowed ${
           isConnected
-            ? "border border-tavern-border text-parchment-muted hover:border-red-700 hover:text-red-400"
-            : "bg-gold text-tavern hover:bg-gold-light"
+            ? "bg-paper-sunken text-ink-3 border-paper-divider hover:border-diff-deadly hover:text-diff-deadly"
+            : "bg-transparent text-accent border-accent hover:opacity-70"
         }`}
       >
-        {loading ? "…" : isConnected ? "Disconnect" : "Connect"}
+        {loading ? "…" : isConnected ? "connected ✓" : "connect"}
       </button>
-      {error && <p className="text-red-400 text-xs">{error}</p>}
+      {error && <p className="text-diff-deadly text-[10px]">{error}</p>}
     </div>
   );
 }

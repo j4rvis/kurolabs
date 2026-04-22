@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:20px; font-size:11px; color:#1c1612; }
+.section { margin-bottom:18px; }
+.label { font-size:9px; color:#9c8c78; letter-spacing:.12em; text-transform:uppercase; margin-bottom:7px; border-bottom:1px solid #e2dbd0; padding-bottom:4px; }
+.row { display:flex; flex-wrap:wrap; gap:6px; margin-bottom:4px; }
+.chip { display:inline-flex; flex-direction:column; gap:3px; }
+.swatch { width:88px; height:28px; border-radius:2px; border:1px solid #d0c4b0; }
+.name { font-size:8px; color:#9c8c78; letter-spacing:.03em; }
+.cls { background:#faf8f3; border:1px solid #e2dbd0; border-radius:2px; padding:2px 7px; font-size:8px; color:#5c4f3d; letter-spacing:.03em; display:inline-block; margin:2px; }
+.cls.p { border-color:#b07030; color:#b07030; background:#f0e2c8; }
+.note { font-size:9px; color:#9c8c78; letter-spacing:.03em; margin-top:4px; font-style:italic; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <div class="label">Layer 1 — kurolabs.css (semantic base, app-agnostic)</div>
+  <div class="row">
+    <div class="chip"><div class="swatch" style="background:#f5f0e8"></div><div class="name">bg-bg</div></div>
+    <div class="chip"><div class="swatch" style="background:#faf8f3"></div><div class="name">bg-surface</div></div>
+    <div class="chip"><div class="swatch" style="background:#ede7da"></div><div class="name">bg-surface-sunken</div></div>
+    <div class="chip"><div class="swatch" style="background:#d0c4b0"></div><div class="name">border-border</div></div>
+    <div class="chip"><div class="swatch" style="background:#e2dbd0"></div><div class="name">border-divider</div></div>
+  </div>
+  <div class="row">
+    <div class="chip"><div class="swatch" style="background:#1c1612"></div><div class="name">text-text</div></div>
+    <div class="chip"><div class="swatch" style="background:#5c4f3d"></div><div class="name">text-text-muted</div></div>
+    <div class="chip"><div class="swatch" style="background:#9c8c78"></div><div class="name">text-text-subtle</div></div>
+    <div class="chip"><div class="swatch" style="background:#c4b8a6;border-color:#d0c4b0"></div><div class="name">text-text-disabled</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="label">Layer 2 — per-app primary (contextual)</div>
+  <div class="row">
+    <div class="chip"><div class="swatch" style="background:#b07030;border-color:#b07030"></div><div class="name">Hub amber</div></div>
+    <div class="chip"><div class="swatch" style="background:#f0e2c8;border-color:#b07030"></div><div class="name">bg-primary-soft</div></div>
+    <div class="chip" style="width:20px;align-self:center;color:#9c8c78;font-size:14px;text-align:center">·</div>
+    <div class="chip"><div class="swatch" style="background:#b83c3c;border-color:#b83c3c"></div><div class="name">Questify vermilion</div></div>
+    <div class="chip"><div class="swatch" style="background:#f5e0e0;border-color:#b83c3c"></div><div class="name">bg-primary-soft</div></div>
+    <div class="chip" style="width:20px;align-self:center;color:#9c8c78;font-size:14px;text-align:center">·</div>
+    <div class="chip"><div class="swatch" style="background:#3d5a9e;border-color:#3d5a9e"></div><div class="name">Omoi indigo</div></div>
+    <div class="chip"><div class="swatch" style="background:#dce4f5;border-color:#3d5a9e"></div><div class="name">bg-primary-soft</div></div>
+  </div>
+  <div class="note">text-primary · bg-primary · bg-primary-soft · border-primary — all resolve to the app's color</div>
+</div>
+
+<div class="section">
+  <div class="label">Layer 2 — questify.css only (difficulty)</div>
+  <div class="row">
+    <div class="chip"><div class="swatch" style="background:#f0f1f2;border-color:#d0d4d8"></div><div class="name">diff-trivial</div></div>
+    <div class="chip"><div class="swatch" style="background:#eaf4ee;border-color:#b8d9c4"></div><div class="name">diff-easy</div></div>
+    <div class="chip"><div class="swatch" style="background:#f9f0e4;border-color:#e0c89a"></div><div class="name">diff-medium</div></div>
+    <div class="chip"><div class="swatch" style="background:#f9ece4;border-color:#e0b898"></div><div class="name">diff-hard</div></div>
+    <div class="chip"><div class="swatch" style="background:#f9e4e4;border-color:#e0a8a8"></div><div class="name">diff-deadly</div></div>
+    <div class="chip"><div class="swatch" style="background:#f0eaf9;border-color:#c8aee0"></div><div class="name">diff-legendary</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="label">Layer 2 — omoi.css only (categories)</div>
+  <div class="row">
+    <div class="chip"><div class="swatch" style="background:#ede8f5;border-color:#c8b8e8"></div><div class="name">cat-philosophy</div></div>
+    <div class="chip"><div class="swatch" style="background:#eaf4ee;border-color:#b8d9c4"></div><div class="name">cat-reading</div></div>
+    <div class="chip"><div class="swatch" style="background:#e8f0f9;border-color:#b0c8e8"></div><div class="name">cat-ideas</div></div>
+    <div class="chip"><div class="swatch" style="background:#f9ece4;border-color:#e0b898"></div><div class="name">cat-writing</div></div>
+    <div class="chip"><div class="swatch" style="background:#f0ede8;border-color:#d0c4b0"></div><div class="name">cat-general</div></div>
+  </div>
+</div>
+
+<div class="section">
+  <div class="label">Common patterns</div>
+  <div>
+    <span class="cls">bg-bg</span><span class="cls">bg-surface</span><span class="cls">bg-surface-sunken</span>
+    <span class="cls">border border-border</span><span class="cls">border-divider</span>
+    <span class="cls">text-text</span><span class="cls">text-text-muted</span><span class="cls">text-text-subtle</span>
+    <span class="cls p">text-primary</span><span class="cls p">bg-primary</span><span class="cls p">bg-primary-soft</span><span class="cls p">border-primary</span>
+    <span class="cls">font-sans</span><span class="cls">font-display</span>
+    <span class="cls">rounded-sm</span><span class="cls">rounded-md</span>
+    <span class="cls">hover:border-primary</span><span class="cls">transition-colors</span>
+  </div>
+</div>
+
+</body>
+</html>

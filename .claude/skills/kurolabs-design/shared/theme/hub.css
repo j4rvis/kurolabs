@@ -1,0 +1,14 @@
+/* ============================================================
+   Hub theme — amber primary
+   Layer 2: sets --color-primary only. No app domain tokens.
+
+   Usage:
+     @import "tailwindcss";
+     @import "../../shared/theme/hub.css";
+   ============================================================ */
+@import "./kurolabs.css";
+
+:root {
+  --color-primary:      #b07030;
+  --color-primary-soft: #f0e2c8;
+}

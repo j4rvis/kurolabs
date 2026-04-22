@@ -1,12 +1,102 @@
 @import "tailwindcss";
 
+@font-face {
+  font-family: 'Syne Mono';
+  src: url('/fonts/SyneMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* ─────────────────────────────────────────
+   BASE DESIGN TOKENS
+   ───────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* Paper surfaces */
+  --paper:          #f5f0e8;
+  --paper-raised:   #faf8f3;
+  --paper-sunken:   #ede7da;
+  --paper-border:   #d0c4b0;
+  --paper-divider:  #e2dbd0;
+
+  /* Ink text scale */
+  --ink-1:  #1c1612;
+  --ink-2:  #5c4f3d;
+  --ink-3:  #9c8c78;
+  --ink-4:  #c4b8a6;
+
+  /* Semantic accent — default: omoi indigo */
+  --accent:      #3d5a9e;
+  --accent-soft: #dce4f5;
+
+  /* Category badge colors */
+  --cat-question-bg:     #e8f0f9;
+  --cat-question-text:   #2d5a8e;
+  --cat-question-border: #b0c8e8;
+  --cat-reminder-bg:     #f9f0e4;
+  --cat-reminder-text:   #b07030;
+  --cat-reminder-border: #e0c89a;
+  --cat-insight-bg:      #eaf4ee;
+  --cat-insight-text:    #3d7a52;
+  --cat-insight-border:  #b8d9c4;
+  --cat-idea-bg:         #ede8f5;
+  --cat-idea-text:       #5840a0;
+  --cat-idea-border:     #c8b8e8;
+  --cat-other-bg:        #f0ede8;
+  --cat-other-text:      #8c7a68;
+  --cat-other-border:    #d0c4b0;
+}
+
+/* ─────────────────────────────────────────
+   TAILWIND TOKEN MAPPING
+   ───────────────────────────────────────── */
+@theme {
+  /* Paper surfaces */
+  --color-paper:         #f5f0e8;
+  --color-paper-raised:  #faf8f3;
+  --color-paper-sunken:  #ede7da;
+  --color-paper-border:  #d0c4b0;
+  --color-paper-divider: #e2dbd0;
+
+  /* Ink scale */
+  --color-ink-1: #1c1612;
+  --color-ink-2: #5c4f3d;
+  --color-ink-3: #9c8c78;
+  --color-ink-4: #c4b8a6;
+
+  /* Semantic accent (resolved at build for Omoi = indigo) */
+  --color-accent:      #3d5a9e;
+  --color-accent-soft: #dce4f5;
+
+  /* Keep legacy omoi aliases for existing component compatibility */
+  --color-omoi:      #3d5a9e;
+  --color-omoi-soft: #dce4f5;
+
+  /* Category badge colors */
+  --color-cat-question-bg:     #e8f0f9;
+  --color-cat-question-text:   #2d5a8e;
+  --color-cat-question-border: #b0c8e8;
+  --color-cat-reminder-bg:     #f9f0e4;
+  --color-cat-reminder-text:   #b07030;
+  --color-cat-reminder-border: #e0c89a;
+  --color-cat-insight-bg:      #eaf4ee;
+  --color-cat-insight-text:    #3d7a52;
+  --color-cat-insight-border:  #b8d9c4;
+  --color-cat-idea-bg:         #ede8f5;
+  --color-cat-idea-text:       #5840a0;
+  --color-cat-idea-border:     #c8b8e8;
+  --color-cat-other-bg:        #f0ede8;
+  --color-cat-other-text:      #8c7a68;
+  --color-cat-other-border:    #d0c4b0;
+
+  /* Fonts */
+  --font-mono:    'Syne Mono', 'Courier New', monospace;
+  --font-display: 'Cinzel', 'Georgia', serif;
 }
 
 body {
-  background-color: var(--background);
-  color: var(--foreground);
-  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  background-color: theme(--color-paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color: theme(--color-ink-1);
+  font-family: theme(--font-mono);
 }

@@ -7,16 +7,17 @@ interface TagChipProps {
 }
 
 export function TagChip({ tag, onClick, active }: TagChipProps) {
-  const base = "inline-block px-2 py-0.5 rounded text-xs font-mono transition-colors";
-  const style = active
-    ? "bg-violet-600 text-white"
-    : "bg-zinc-800 text-zinc-400 hover:bg-zinc-700 hover:text-zinc-300";
-
   return (
     <button
       onClick={(e) => { e.stopPropagation(); onClick?.(); }}
-      className={`${base} ${style} ${onClick ? "cursor-pointer" : "cursor-default"}`}
       type="button"
+      className={`inline-block px-[7px] py-[2px] rounded-[2px] text-[10px] tracking-[.04em] border transition-all ${
+        onClick ? "cursor-pointer" : "cursor-default"
+      } ${
+        active
+          ? "bg-omoi-soft text-omoi border-omoi"
+          : "bg-paper-sunken text-ink-3 border-paper-divider"
+      }`}
     >
       #{tag}
     </button>

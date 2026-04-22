@@ -10,3 +10,4 @@ Read this file to discover available skills. Do NOT scan individual skill files.
 | opsx:apply | `/opsx:apply` | Implement tasks from an existing OpenSpec change. |
 | opsx:explore | `/opsx:explore` | Thinking-partner mode — explore ideas, investigate problems, clarify requirements before proposing. |
 | opsx:archive | `/opsx:archive` | Archive a completed change after implementation. |
+| design-ingest | `.claude/skills/design-ingest.md` | Ingest a Claude Design handoff zip — copies files to permanent homes, updates the design skill, and deletes the zip. Trigger phrases: "incorporate the design zip", "ingest the design handoff", "new design zip", "/design-ingest". |

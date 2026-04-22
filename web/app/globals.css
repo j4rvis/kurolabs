@@ -1,73 +1,124 @@
 @import "tailwindcss";
 
-:root {
-  /* Dark tavern palette */
-  --tavern:           #1a1208;
-  --tavern-light:     #2d2010;
-  --tavern-mid:       #3d2f18;
-  --tavern-border:    #5a4025;
-
-  /* Parchment */
-  --parchment:        #f5e6c8;
-  --parchment-dark:   #e0c990;
-  --parchment-muted:  #c8aa78;
-
-  /* Ink (text on parchment) */
-  --ink:              #2c1810;
-  --ink-muted:        #7a5c40;
-
-  /* Gold accent */
-  --gold:             #c9a227;
-  --gold-light:       #f0c940;
-
-  /* Difficulty colors */
-  --diff-trivial:     #6c757d;
-  --diff-easy:        #3a8c4e;
-  --diff-medium:      #c9a227;
-  --diff-hard:        #d4732a;
-  --diff-deadly:      #c0392b;
-  --diff-legendary:   #8e44ad;
-
-  /* Quest type colors */
-  --type-daily:       #2980b9;
-  --type-side:        #27ae60;
-  --type-epic:        #8e44ad;
+@font-face {
+  font-family: 'Syne Mono';
+  src: url('/fonts/SyneMono-Regular.ttf') format('truetype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
 }
 
+/* ─────────────────────────────────────────
+   BASE DESIGN TOKENS
+   ───────────────────────────────────────── */
+:root {
+  /* Paper surfaces */
+  --paper:          #f5f0e8;
+  --paper-raised:   #faf8f3;
+  --paper-sunken:   #ede7da;
+  --paper-border:   #d0c4b0;
+  --paper-divider:  #e2dbd0;
+
+  /* Ink text scale */
+  --ink-1:  #1c1612;
+  --ink-2:  #5c4f3d;
+  --ink-3:  #9c8c78;
+  --ink-4:  #c4b8a6;
+
+  /* Semantic accent — default: hub amber */
+  --accent:      #b07030;
+  --accent-soft: #f0e2c8;
+
+  /* Difficulty palette */
+  --diff-trivial:   #8a9099;
+  --diff-easy:      #3d7a52;
+  --diff-medium:    #b07030;
+  --diff-hard:      #b85a20;
+  --diff-deadly:    #b83c3c;
+  --diff-legendary: #7040a0;
+
+  /* Omoi category badges */
+  --cat-question-bg:     #e8f0f9;
+  --cat-question-text:   #2d5a8e;
+  --cat-question-border: #b0c8e8;
+  --cat-reminder-bg:     #f9f0e4;
+  --cat-reminder-text:   #b07030;
+  --cat-reminder-border: #e0c89a;
+  --cat-insight-bg:      #eaf4ee;
+  --cat-insight-text:    #3d7a52;
+  --cat-insight-border:  #b8d9c4;
+  --cat-idea-bg:         #ede8f5;
+  --cat-idea-text:       #5840a0;
+  --cat-idea-border:     #c8b8e8;
+  --cat-other-bg:        #f0ede8;
+  --cat-other-text:      #8c7a68;
+  --cat-other-border:    #d0c4b0;
+}
+
+/* ─────────────────────────────────────────
+   PER-APP THEME OVERRIDES
+   ───────────────────────────────────────── */
+.theme-questify { --accent: #b83c3c; --accent-soft: #f5e0e0; }
+.theme-omoi     { --accent: #3d5a9e; --accent-soft: #dce4f5; }
+
+/* ─────────────────────────────────────────
+   TAILWIND TOKEN MAPPING
+   ───────────────────────────────────────── */
 @theme inline {
-  --font-sans:             var(--font-geist-sans);
-  --font-mono:             var(--font-geist-mono);
-  --font-display:          var(--font-cinzel);
+  --font-sans:    var(--font-geist-sans);
+  --font-mono:    'Syne Mono', 'Courier New', monospace;
+  --font-display: var(--font-cinzel);
 
-  --color-tavern:          var(--tavern);
-  --color-tavern-light:    var(--tavern-light);
-  --color-tavern-mid:      var(--tavern-mid);
-  --color-tavern-border:   var(--tavern-border);
+  /* Paper surfaces */
+  --color-paper:         var(--paper);
+  --color-paper-raised:  var(--paper-raised);
+  --color-paper-sunken:  var(--paper-sunken);
+  --color-paper-border:  var(--paper-border);
+  --color-paper-divider: var(--paper-divider);
 
-  --color-parchment:       var(--parchment);
-  --color-parchment-dark:  var(--parchment-dark);
-  --color-parchment-muted: var(--parchment-muted);
+  /* Ink scale */
+  --color-ink-1: var(--ink-1);
+  --color-ink-2: var(--ink-2);
+  --color-ink-3: var(--ink-3);
+  --color-ink-4: var(--ink-4);
 
-  --color-ink:             var(--ink);
-  --color-ink-muted:       var(--ink-muted);
+  /* Semantic accent */
+  --color-accent:      var(--accent);
+  --color-accent-soft: var(--accent-soft);
 
-  --color-gold:            var(--gold);
-  --color-gold-light:      var(--gold-light);
+  /* Omoi aliases — components reference these; they resolve through --accent in context */
+  --color-omoi:      var(--accent);
+  --color-omoi-soft: var(--accent-soft);
 
-  --color-diff-trivial:    var(--diff-trivial);
-  --color-diff-easy:       var(--diff-easy);
-  --color-diff-medium:     var(--diff-medium);
-  --color-diff-hard:       var(--diff-hard);
-  --color-diff-deadly:     var(--diff-deadly);
-  --color-diff-legendary:  var(--diff-legendary);
+  /* Difficulty */
+  --color-diff-trivial:   var(--diff-trivial);
+  --color-diff-easy:      var(--diff-easy);
+  --color-diff-medium:    var(--diff-medium);
+  --color-diff-hard:      var(--diff-hard);
+  --color-diff-deadly:    var(--diff-deadly);
+  --color-diff-legendary: var(--diff-legendary);
 
-  --color-type-daily:      var(--type-daily);
-  --color-type-side:       var(--type-side);
-  --color-type-epic:       var(--type-epic);
+  /* Omoi category badges */
+  --color-cat-question-bg:     var(--cat-question-bg);
+  --color-cat-question-text:   var(--cat-question-text);
+  --color-cat-question-border: var(--cat-question-border);
+  --color-cat-reminder-bg:     var(--cat-reminder-bg);
+  --color-cat-reminder-text:   var(--cat-reminder-text);
+  --color-cat-reminder-border: var(--cat-reminder-border);
+  --color-cat-insight-bg:      var(--cat-insight-bg);
+  --color-cat-insight-text:    var(--cat-insight-text);
+  --color-cat-insight-border:  var(--cat-insight-border);
+  --color-cat-idea-bg:         var(--cat-idea-bg);
+  --color-cat-idea-text:       var(--cat-idea-text);
+  --color-cat-idea-border:     var(--cat-idea-border);
+  --color-cat-other-bg:        var(--cat-other-bg);
+  --color-cat-other-text:      var(--cat-other-text);
+  --color-cat-other-border:    var(--cat-other-border);
 }
 
 body {
-  background-color: var(--tavern);
-  color: var(--parchment);
-  font-family: var(--font-sans), system-ui, sans-serif;
+  background-color: var(--paper);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+  color: var(--ink-1);
+  font-family: var(--font-mono), 'Courier New', monospace;
 }

@@ -1,0 +1,78 @@
+/* ============================================================
+   Questify theme — vermilion primary + quest domain tokens
+   Layer 2: sets primary, then adds Questify-specific tokens.
+   The base theme (kurolabs.css) knows nothing about quests.
+
+   Usage:
+     @import "tailwindcss";
+     @import "../../shared/theme/questify.css";
+   ============================================================ */
+@import "./kurolabs.css";
+
+:root {
+  /* ── Primary ── */
+  --color-primary:      #b83c3c;
+  --color-primary-soft: #f5e0e0;
+
+  /* ── Questify domain tokens ──────────────────────────────
+     These ONLY live here. kurolabs.css has no knowledge of
+     difficulty, XP, quest types, or any game mechanics.
+     ────────────────────────────────────────────────────── */
+
+  /* Difficulty scale */
+  --color-diff-trivial:    #8a9099;
+  --color-diff-easy:       #3d7a52;
+  --color-diff-medium:     #b07030;
+  --color-diff-hard:       #b85a20;
+  --color-diff-deadly:     #b83c3c;
+  --color-diff-legendary:  #7040a0;
+
+  /* Difficulty backgrounds (for badges) */
+  --color-diff-trivial-soft:   #f0f1f2;
+  --color-diff-easy-soft:      #eaf4ee;
+  --color-diff-medium-soft:    #f9f0e4;
+  --color-diff-hard-soft:      #f9ece4;
+  --color-diff-deadly-soft:    #f9e4e4;
+  --color-diff-legendary-soft: #f0eaf9;
+
+  /* Difficulty borders */
+  --color-diff-trivial-border:   #d0d4d8;
+  --color-diff-easy-border:      #b8d9c4;
+  --color-diff-medium-border:    #e0c89a;
+  --color-diff-hard-border:      #e0b898;
+  --color-diff-deadly-border:    #e0a8a8;
+  --color-diff-legendary-border: #c8aee0;
+
+  /* Quest type colors */
+  --color-type-daily:      #2d5a8e;
+  --color-type-daily-soft: #e8f0f9;
+  --color-type-side:       #3d7a52;
+  --color-type-side-soft:  #eaf4ee;
+  --color-type-epic:       #7040a0;
+  --color-type-epic-soft:  #f0eaf9;
+}
+
+/* ── Questify Tailwind extensions ─────────────────────── */
+@theme inline {
+  /* Difficulty */
+  --color-diff-trivial:         var(--color-diff-trivial);
+  --color-diff-trivial-soft:    var(--color-diff-trivial-soft);
+  --color-diff-easy:            var(--color-diff-easy);
+  --color-diff-easy-soft:       var(--color-diff-easy-soft);
+  --color-diff-medium:          var(--color-diff-medium);
+  --color-diff-medium-soft:     var(--color-diff-medium-soft);
+  --color-diff-hard:            var(--color-diff-hard);
+  --color-diff-hard-soft:       var(--color-diff-hard-soft);
+  --color-diff-deadly:          var(--color-diff-deadly);
+  --color-diff-deadly-soft:     var(--color-diff-deadly-soft);
+  --color-diff-legendary:       var(--color-diff-legendary);
+  --color-diff-legendary-soft:  var(--color-diff-legendary-soft);
+
+  /* Quest types */
+  --color-type-daily:       var(--color-type-daily);
+  --color-type-daily-soft:  var(--color-type-daily-soft);
+  --color-type-side:        var(--color-type-side);
+  --color-type-side-soft:   var(--color-type-side-soft);
+  --color-type-epic:        var(--color-type-epic);
+  --color-type-epic-soft:   var(--color-type-epic-soft);
+}

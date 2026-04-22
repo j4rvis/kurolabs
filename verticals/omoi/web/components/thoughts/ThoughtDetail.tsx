@@ -32,54 +32,56 @@ export function ThoughtDetail({
   }
 
   return (
-    <div className="flex flex-col gap-6">
-      <div className="bg-zinc-900 border border-zinc-800 rounded-lg p-6">
+    <div className="flex flex-col gap-5">
+      <div className="bg-paper-raised border border-paper-border rounded-[4px] p-7">
         {editing ? (
           <div className="flex flex-col gap-3">
             <textarea
               value={editContent}
               onChange={(e) => setEditContent(e.target.value)}
-              className="w-full h-40 bg-zinc-800 border border-zinc-700 rounded p-3 text-zinc-200 text-sm resize-none focus:outline-none focus:border-violet-500"
+              className="w-full h-40 bg-paper-sunken border border-paper-border focus:border-omoi rounded-[4px] p-3 text-ink-1 text-[12px] tracking-[.02em] leading-[1.7] resize-none outline-none caret-omoi transition-colors"
             />
             <div className="flex gap-2">
               <button
                 onClick={handleSave}
                 disabled={saving}
-                className="px-4 py-2 bg-violet-600 hover:bg-violet-700 disabled:opacity-50 rounded text-sm text-white"
+                className="bg-omoi text-white rounded-[2px] px-[18px] py-[7px] text-[10px] tracking-[.08em] disabled:opacity-50"
               >
-                {saving ? "Saving…" : "Save"}
+                {saving ? "saving…" : "save"}
               </button>
               <button
                 onClick={() => { setEditing(false); setEditContent(thought.content); }}
-                className="px-4 py-2 bg-zinc-800 hover:bg-zinc-700 rounded text-sm text-zinc-300"
+                className="bg-paper-sunken text-ink-2 rounded-[2px] px-[18px] py-[7px] text-[10px] tracking-[.08em]"
               >
-                Cancel
+                cancel
               </button>
             </div>
           </div>
         ) : (
-          <p className="text-zinc-200 text-sm leading-relaxed whitespace-pre-wrap">{thought.content}</p>
+          <p className="text-ink-1 text-[13px] leading-[1.8] tracking-[.02em] whitespace-pre-wrap">
+            {thought.content}
+          </p>
         )}
 
-        <div className="flex items-center gap-2 mt-4 flex-wrap border-t border-zinc-800 pt-4">
+        <div className="flex items-center gap-2 mt-5 pt-4 border-t border-paper-divider flex-wrap">
           <CategoryBadge category={thought.category} />
           {thought.tags.map((tag) => (
             <TagChip key={tag} tag={tag} />
           ))}
-          <div className="ml-auto flex gap-3">
+          <div className="ml-auto flex gap-4">
             {!editing && (
               <button
                 onClick={() => setEditing(true)}
-                className="text-xs text-zinc-500 hover:text-zinc-300"
+                className="text-[10px] tracking-[.06em] text-ink-3 hover:text-ink-2"
               >
-                Edit
+                edit
               </button>
             )}
             <button
               onClick={() => onDelete(thought.id)}
-              className="text-xs text-red-600 hover:text-red-400"
+              className="text-[10px] tracking-[.06em] text-[#b83c3c] hover:opacity-70"
             >
-              Delete
+              delete
             </button>
           </div>
         </div>
@@ -87,17 +89,17 @@ export function ThoughtDetail({
 
       {connections.length > 0 && (
         <div>
-          <h3 className="text-xs font-semibold text-zinc-500 uppercase tracking-wider mb-3">
-            Connected thoughts
+          <h3 className="text-ink-3 text-[9px] tracking-[.08em] uppercase mb-3">
+            connected thoughts
           </h3>
           <div className="flex flex-col gap-2">
             {connections.map((c) => (
               <div
                 key={c.id}
                 onClick={() => onConnectionClick(c.id)}
-                className="bg-zinc-900 border border-zinc-800 rounded-lg p-3 cursor-pointer hover:border-zinc-700 transition-colors"
+                className="bg-paper-raised border border-paper-divider hover:border-paper-border rounded-[4px] p-3 cursor-pointer transition-colors"
               >
-                <p className="text-zinc-300 text-sm line-clamp-2">{c.content}</p>
+                <p className="text-ink-2 text-[12px] leading-[1.7] line-clamp-2">{c.content}</p>
                 <div className="flex gap-2 mt-2">
                   <CategoryBadge category={c.category} />
                 </div>

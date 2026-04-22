@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<style>
+@font-face { font-family:'Syne Mono'; src:url('../fonts/SyneMono-Regular.ttf') format('truetype'); }
+*{box-sizing:border-box;margin:0;padding:0;}
+body { background:#f5f0e8; font-family:'Syne Mono',monospace; padding:20px; font-size:11px; color:#1c1612; }
+.layer { border:1px solid #e2dbd0; border-radius:4px; margin-bottom:10px; overflow:hidden; }
+.layer-header { background:#faf8f3; border-bottom:1px solid #e2dbd0; padding:8px 12px; font-size:9px; letter-spacing:.1em; color:#9c8c78; text-transform:uppercase; display:flex; justify-content:space-between; }
+.layer-body { padding:10px 12px; display:flex; flex-wrap:wrap; gap:6px; }
+.token { display:inline-flex; align-items:center; gap:6px; background:#f5f0e8; border:1px solid #e2dbd0; border-radius:2px; padding:3px 8px; font-size:9px; color:#5c4f3d; }
+.dot { width:10px; height:10px; border-radius:1px; flex-shrink:0; }
+.app-col { flex:1; min-width:160px; }
+.app-label { font-size:9px; letter-spacing:.08em; color:#9c8c78; margin-bottom:6px; }
+.app-token { font-size:9px; color:#5c4f3d; padding:2px 0; border-bottom:1px solid #e2dbd0; display:flex; justify-content:space-between; }
+.app-token:last-child { border-bottom:none; }
+</style>
+</head>
+<body>
+
+<div class="layer">
+  <div class="layer-header">
+    <span>kurolabs_theme.dart — Layer 1 · semantic base · all apps share this</span>
+  </div>
+  <div class="layer-body">
+    <span class="token"><span class="dot" style="background:#f5f0e8;border:1px solid #d0c4b0"></span>t.bg</span>
+    <span class="token"><span class="dot" style="background:#faf8f3;border:1px solid #d0c4b0"></span>t.surface</span>
+    <span class="token"><span class="dot" style="background:#ede7da;border:1px solid #d0c4b0"></span>t.surfaceSunken</span>
+    <span class="token"><span class="dot" style="background:#d0c4b0"></span>t.border</span>
+    <span class="token"><span class="dot" style="background:#e2dbd0"></span>t.divider</span>
+    <span class="token"><span class="dot" style="background:#1c1612"></span>t.text</span>
+    <span class="token"><span class="dot" style="background:#5c4f3d"></span>t.textMuted</span>
+    <span class="token"><span class="dot" style="background:#9c8c78"></span>t.textSubtle</span>
+    <span class="token"><span class="dot" style="background:#c4b8a6;border:1px solid #d0c4b0"></span>t.textDisabled</span>
+    <span class="token" style="border-color:#9c8c78;color:#9c8c78"><span class="dot" style="background:#9c8c78"></span>t.primary ← per app</span>
+    <span class="token" style="border-color:#9c8c78;color:#9c8c78"><span class="dot" style="background:#e2dbd0"></span>t.primarySoft ← per app</span>
+  </div>
+</div>
+
+<div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+  <div class="layer">
+    <div class="layer-header" style="border-bottom-color:#e0c89a;color:#b07030">hub_theme.dart</div>
+    <div style="padding:10px 12px">
+      <div class="app-token"><span>t.primary</span><span class="dot" style="background:#b07030;border:1px solid #b07030"></span></div>
+      <div class="app-token"><span>t.primarySoft</span><span class="dot" style="background:#f0e2c8;border:1px solid #b07030"></span></div>
+      <div style="font-size:9px;color:#c4b8a6;margin-top:8px">No domain extension</div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-header" style="border-bottom-color:#e0a8a8;color:#b83c3c">questify_theme.dart</div>
+    <div style="padding:10px 12px">
+      <div class="app-token"><span>t.primary</span><span class="dot" style="background:#b83c3c"></span></div>
+      <div class="app-token"><span>q.diffEasy</span><span class="dot" style="background:#3d7a52"></span></div>
+      <div class="app-token"><span>q.diffDeadly</span><span class="dot" style="background:#b83c3c"></span></div>
+      <div class="app-token"><span>q.typeDaily</span><span class="dot" style="background:#2d5a8e"></span></div>
+      <div class="app-token"><span>q.typeEpic</span><span class="dot" style="background:#7040a0"></span></div>
+    </div>
+  </div>
+  <div class="layer">
+    <div class="layer-header" style="border-bottom-color:#b0c8e8;color:#3d5a9e">omoi_theme.dart</div>
+    <div style="padding:10px 12px">
+      <div class="app-token"><span>t.primary</span><span class="dot" style="background:#3d5a9e"></span></div>
+      <div class="app-token"><span>o.catPhilosophy</span><span class="dot" style="background:#5840a0"></span></div>
+      <div class="app-token"><span>o.catReading</span><span class="dot" style="background:#3d7a52"></span></div>
+      <div class="app-token"><span>o.catIdeas</span><span class="dot" style="background:#2d5a8e"></span></div>
+      <div class="app-token"><span>o.catWriting</span><span class="dot" style="background:#b85a20"></span></div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>

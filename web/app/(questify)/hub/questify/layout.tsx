@@ -15,7 +15,7 @@ export default async function DashboardLayout({
   if (!user) redirect("/auth/login");
 
   return (
-    <div className="min-h-screen bg-tavern flex flex-col">
+    <div className="theme-questify min-h-screen bg-paper flex flex-col">
       <DashboardNav />
       <main className="flex-1 max-w-7xl mx-auto w-full px-4 sm:px-6 py-8">
         {children}

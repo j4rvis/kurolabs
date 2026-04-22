@@ -33,20 +33,18 @@ export default async function VillagePage() {
   return (
     <div>
       <div className="mb-8">
-        <h1 className="font-display text-2xl text-gold tracking-wide mb-1">
-          The Village
-        </h1>
-        <p className="text-parchment-muted text-sm">
-          Meet the villagers and accept their quests
+        <h1 className="text-ink-1 text-[16px] tracking-[.12em] mb-1">The Village</h1>
+        <p className="text-ink-3 text-[11px] tracking-[.03em]">
+          Connect with guides to receive quests in their domain.
         </p>
       </div>
 
       {connected.length > 0 && (
         <section className="mb-10">
-          <h2 className="font-display text-sm text-parchment-muted tracking-widest uppercase mb-4">
+          <h2 className="text-ink-3 text-[9px] tracking-[.1em] uppercase mb-4">
             Your Quest Givers
           </h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[14px]">
             {connected.map((npc) => (
               <NpcCard key={npc.id} npc={npc} />
             ))}
@@ -55,10 +53,10 @@ export default async function VillagePage() {
       )}
 
       <section>
-        <h2 className="font-display text-sm text-parchment-muted tracking-widest uppercase mb-4">
+        <h2 className="text-ink-3 text-[9px] tracking-[.1em] uppercase mb-4">
           {connected.length > 0 ? "Other Villagers" : "All Villagers"}
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-[14px]">
           {unconnected.map((npc) => (
             <NpcCard key={npc.id} npc={npc} />
           ))}
